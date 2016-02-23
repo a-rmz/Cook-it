@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="@dimen/logo_login_width"
         android:layout_height="@dimen/logo_login_height"
-        android:src="@drawable/main_logo"
+        android:src="@drawable/main_logo_sf"
         android:layout_centerHorizontal="true"
         android:id="@+id/imageView"/>
 
