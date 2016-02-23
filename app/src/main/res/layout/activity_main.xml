@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.dangerducks.cookit.MainActivity">
+
+    <ImageView
+        android:layout_width="@dimen/logo_login_width"
+        android:layout_height="@dimen/logo_login_height"
+        android:src="@drawable/main_logo"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/logo_login_height"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/usr"
+            android:hint="@string/hint_usr"
+            android:inputType="textPersonName"
+            android:drawableLeft="@drawable/icon_user16"
+            android:drawablePadding="@dimen/icon_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <EditText
+            android:id="@+id/pass"
+            android:hint="@string/hint_pass"
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/icon_pass16"
+            android:drawablePadding="@dimen/icon_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/action_login"/>
+
+            <Button
+                android:id="@+id/btn_signin"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/action_signin"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
