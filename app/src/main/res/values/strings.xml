@@ -8,4 +8,6 @@
     <string name="hint_usr">Username</string>
     <string name="hint_pass">Password</string>
     <string name="copyright">All rights reserved © Danger Ducks 2016</string>
+    <string name="open_drawer">Menu</string>
+    <string name="close_drawer">Close</string>
 </resources>
