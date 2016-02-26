@@ -2,6 +2,7 @@ package com.dangerducks.cookit;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -105,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nothingToDoHere() {
-        Context context = getApplicationContext();
-        CharSequence message = "Those are not the droids you're looking for...";
-        int duration = Toast.LENGTH_LONG;
+        Snackbar.make(findViewById(R.id.drawer_layout), "I'm a Snackbar", Snackbar.LENGTH_SHORT).show();
     }
 }
