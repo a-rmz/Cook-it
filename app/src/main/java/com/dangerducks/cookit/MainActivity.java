@@ -35,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpDrawer() {
+        planets = getResources().getStringArray(R.array.planets);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        listView = (ListView) findViewById(R.id.left_drawer);
+
+        listView.setAdapter(new ArrayAdapter<>(this, R.layout.list_item, planets));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
             public void onDrawerOpened(View view) {
                 super.onDrawerOpened(view);
@@ -56,18 +68,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_actions, menu);
-
-        planets = getResources().getStringArray(R.array.planets);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        listView = (ListView) findViewById(R.id.left_drawer);
-
-        listView.setAdapter(new ArrayAdapter<>(this, R.layout.list_item, planets));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
 
         return super.onCreateOptionsMenu(menu);
     }
