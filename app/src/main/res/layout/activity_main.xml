@@ -22,6 +22,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/loginBackground"
         tools:context="com.dangerducks.cookit.MainActivity">
 
         <ImageView
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/logo_login_height"
             android:padding="@dimen/activity_horizontal_margin"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
 
@@ -45,6 +47,8 @@
                 android:inputType="textPersonName"
                 android:drawableLeft="@drawable/icon_user16"
                 android:drawablePadding="@dimen/icon_padding"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -55,6 +59,8 @@
                 android:inputType="textPassword"
                 android:drawableLeft="@drawable/icon_pass16"
                 android:drawablePadding="@dimen/icon_padding"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -62,24 +68,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingTop="20dp">
 
                 <Button
                     android:id="@+id/btn_login"
-                    style="@style/AppTheme"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    style="@style/loginButton"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_login"/>
+                    android:text="@string/action_login"
+                    android:layout_width="match_parent"/>
 
                 <Button
                     android:id="@+id/btn_signin"
-                    style="@style/AppTheme"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    style="@style/loginButton"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_signin"/>
+                    android:text="@string/action_signin"
+                    android:layout_width="match_parent"/>
 
             </LinearLayout>
 
