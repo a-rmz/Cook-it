@@ -35,8 +35,18 @@ public class MainActivity extends AppCompatActivity {
         setUpDrawer();
     }
 
+    protected void onRestart() {
+        super.onRestart();
+        EditText clear = (EditText) findViewById(R.id.usr);
+        clear.setText("");
+        clear.requestFocus();
+        clear = (EditText) findViewById(R.id.pass);
+        clear.setText("");
+
+    }
+
     private void setUpDrawer() {
-        planets = getResources().getStringArray(R.array.planets);
+        planets = getResources().getStringArray(R.array.drawer_options);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listView = (ListView) findViewById(R.id.left_drawer);
 
