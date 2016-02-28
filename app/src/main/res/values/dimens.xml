@@ -6,5 +6,4 @@
     <dimen name="logo_login_width">180dp</dimen>
     <dimen name="logo_login_height">140dp</dimen>
 
-    <dimen name="icon_padding">10dp</dimen>
 </resources>
