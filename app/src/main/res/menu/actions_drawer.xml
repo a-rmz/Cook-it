@@ -3,18 +3,23 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:icon="@drawable/ic_receipt_white_24dp"
             android:id="@+id/nav_my_recipes"
             android:title="@string/my_recipes"/>
         <item
+            android:icon="@drawable/ic_whatshot_white_24dp"
             android:id="@+id/nav_discovery"
             android:title="@string/discovery"/>
         <item
+            android:icon="@drawable/ic_star_white_24dp"
             android:id="@+id/nav_favourites"
             android:title="@string/favourites"/>
         <item
+            android:icon="@drawable/ic_turned_in_white_24dp"
             android:id="@+id/nav_offline_recipes"
             android:title="@string/offline_recipes"/>
         <item
+            android:icon="@drawable/ic_archive_white_24dp"
             android:id="@+id/nav_saved_for_later"
             android:title="@string/saved_for_later"/>
     </group>
@@ -22,23 +27,14 @@
     <item android:title="@string/configuration">
         <menu>
             <item
+                android:icon="@drawable/ic_account_circle_white_24dp"
                 android:id="@+id/nav_profile"
                 android:title="@string/profile"/>
             <item
+                android:icon="@drawable/ic_settings_applications_white_24dp"
                 android:id="@+id/nav_settings"
                 android:title="@string/settings"/>
         </menu>
     </item>
 
 </menu>
-
-<!-- options
-<string name="my_recipes">My recipes</string>
-<string name="discovery">Discovery</string>
-<string name="favourites">Favourites</string>
-<string name="offline_recipes">Offline Recipes</string>
-<string name="saved_for_later">Saved for later</string>
-<string name="profile">Profile</string>
-<string name="settings">Settings</string>
-
--->

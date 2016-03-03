@@ -33,11 +33,9 @@ public class Login extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationIcon(android.R.drawable.ic_media_play); // Change icon
         toolbar.inflateMenu(R.menu.main_activity_actions);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        //View header = getLayoutInflater().inflate(R.layout.header, null);
 
         // Home menu for header
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -131,7 +129,9 @@ public class Login extends AppCompatActivity {
                 nothingToDoHere();
                 return true;
             case R.id.action_credits:
-                nothingToDoHere();
+                AboutDialog aboutDialog = new AboutDialog(Login.this);
+                aboutDialog.setTitle(getResources().getString(R.string.about));
+                aboutDialog.show();
                 return true;
             case R.id.action_settings:
                 nothingToDoHere();

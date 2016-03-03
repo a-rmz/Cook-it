@@ -11,4 +11,5 @@
     <string name="open_drawer">Menu</string>
     <string name="close_drawer">Close</string>
     <string name="configuration">Configuration</string>
+    <string name="about">About</string>
 </resources>

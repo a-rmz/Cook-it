@@ -6,26 +6,29 @@
               android:layout_height="@dimen/header_height"
               android:gravity="bottom"
               android:padding="10dp"
-              android:background="@color/colorPrimaryDark">
+              android:background="@drawable/user_banner">
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:paddingLeft="30dp"
         android:src="@drawable/icon_user_blue"/>
 
     <TextView
         android:id="@+id/user_drawer"
         android:paddingTop="20dp"
+        android:paddingLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hint_usr"
         android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:textColor="@color/user_detail"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Other thing"
-        android:textColor="@color/white"/>
+        android:paddingLeft="20dp"
+        android:text="something@email.com"
+        android:textColor="@color/user_detail"/>
 
 </LinearLayout>

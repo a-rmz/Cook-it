@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_message">
+        The icons used on this application were taken from Google Design. No modifications made. The icons are available under the CC-BY license.
+
+    </string>
+    <string name="links">
+        https://design.google.com/icons/
+    </string>
+</resources>
