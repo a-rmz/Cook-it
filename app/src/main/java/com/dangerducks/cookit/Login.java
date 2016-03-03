@@ -29,18 +29,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        // Inflate toolbar
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.inflateMenu(R.menu.main_activity_actions);
+        setupToolbar();
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-
-        // Home menu for header
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         setUpDrawer();
 
         login = (Button) findViewById(R.id.btn_login);
@@ -96,6 +88,18 @@ public class Login extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.inflateMenu(R.menu.main_activity_actions);
+
+        // Home menu for header
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
     }
 
