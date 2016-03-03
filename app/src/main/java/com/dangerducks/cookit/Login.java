@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.*;
 import android.widget.*;
@@ -38,13 +37,13 @@ public class Login extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.main_activity_actions);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        //View drawer = getLayoutInflater().inflate(R.layout.drawer, null);
 
         // Home menu for drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         setUpDrawer();
-
 
         login = (Button) findViewById(R.id.btn_login);
         login.setOnClickListener(new View.OnClickListener() {
