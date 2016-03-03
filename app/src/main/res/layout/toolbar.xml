@@ -6,10 +6,4 @@
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
     android:background="@color/colorPrimary">
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/icon_pass_blue"/>
-
     </android.support.v7.widget.Toolbar>
