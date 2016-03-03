@@ -15,7 +15,6 @@ import android.widget.*;
 
 public class Login extends AppCompatActivity {
 
-    private String[] planets;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button login;
@@ -72,7 +71,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void setUpDrawer() {
-        planets = getResources().getStringArray(R.array.drawer_options);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.left_drawer);
 

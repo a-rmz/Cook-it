@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="my_recipes">My recipes</string>
+    <string name="discovery">Discovery</string>
+    <string name="favourites">Favourites</string>
+    <string name="offline_recipes">Offline Recipes</string>
+    <string name="saved_for_later">Saved for later</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+
+</resources>
