@@ -100,13 +100,13 @@ public class Login extends AppCompatActivity {
         drawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.main_activity_actions, menu);
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
