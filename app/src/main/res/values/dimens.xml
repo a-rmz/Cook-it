@@ -7,4 +7,6 @@
     <dimen name="logo_login_height">140dp</dimen>
 
     <dimen name="drawer_width">240dp</dimen>
+    <dimen name="header_height">140dp</dimen>
+
 </resources>

@@ -2,6 +2,7 @@ package com.dangerducks.cookit;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,7 +17,7 @@ public class Login extends AppCompatActivity {
 
     private String[] planets;
     private DrawerLayout drawerLayout;
-    private ListView listView;
+    private NavigationView navigationView;
     private Button login;
 
     Toolbar toolbar;
@@ -37,9 +38,9 @@ public class Login extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.main_activity_actions);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        //View drawer = getLayoutInflater().inflate(R.layout.drawer, null);
+        //View header = getLayoutInflater().inflate(R.layout.header, null);
 
-        // Home menu for drawer
+        // Home menu for header
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -73,17 +74,7 @@ public class Login extends AppCompatActivity {
     private void setUpDrawer() {
         planets = getResources().getStringArray(R.array.drawer_options);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        listView = (ListView) findViewById(R.id.left_drawer);
-
-        listView.addHeaderView(getLayoutInflater().inflate(R.layout.drawer, null));
-
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, planets));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+        navigationView = (NavigationView) findViewById(R.id.left_drawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
             public void onDrawerOpened(View view) {
@@ -100,6 +91,15 @@ public class Login extends AppCompatActivity {
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                return false;
+            }
+        });
 
     }
 
