@@ -75,6 +75,8 @@ public class Login extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listView = (ListView) findViewById(R.id.left_drawer);
 
+        listView.addHeaderView(getLayoutInflater().inflate(R.layout.drawer, null));
+
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, planets));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,6 +100,7 @@ public class Login extends AppCompatActivity {
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(mDrawerToggle);
+
     }
 
     @Override
