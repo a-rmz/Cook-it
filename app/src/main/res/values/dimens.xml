@@ -9,4 +9,6 @@
     <dimen name="drawer_width">300dp</dimen>
     <dimen name="header_height">155dp</dimen>
 
+    <dimen name="half_screen">110dp</dimen>
+
 </resources>

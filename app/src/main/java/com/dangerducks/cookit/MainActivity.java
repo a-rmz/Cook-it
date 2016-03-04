@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 
 /**
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity{
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     Toolbar toolbar;
+    private ImageView taco;
 
 
     @Override
@@ -36,6 +38,14 @@ public class MainActivity extends AppCompatActivity{
 
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
+
+        taco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
     }
 
 
