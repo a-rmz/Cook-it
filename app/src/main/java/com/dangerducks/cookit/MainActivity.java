@@ -1,7 +1,9 @@
 package com.dangerducks.cookit;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,31 +22,25 @@ public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle mDrawerToggle;
+    private String mActivityTitle;
     Toolbar toolbar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setupToolbar();
 
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
     }
 
-    private void setupToolbar() {
-        this.setSupportActionBar(toolbar);
-        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.inflateMenu(R.menu.main_activity_actions);
-
-        // Home menu for header
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setHomeButtonEnabled(true);
-    }
 
     private void setUpDrawer() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.main_drawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("");
+                getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu();
             }
         };
@@ -74,6 +70,18 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.inflateMenu(R.menu.main_activity_actions);
+
+        // Home menu for header
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -81,4 +89,43 @@ public class MainActivity extends AppCompatActivity{
 
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+
+        if (mDrawerToggle.onOptionsItemSelected(menuItem)) {
+            return true;
+        }
+        switch (menuItem.getItemId()) {
+            case R.id.action_search:
+                nothingToDoHere();
+                return true;
+            case R.id.action_credits:
+                AboutDialog aboutDialog = new AboutDialog(this);
+                aboutDialog.setTitle(getResources().getString(R.string.about));
+                aboutDialog.show();
+                return true;
+            case R.id.action_settings:
+                nothingToDoHere();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+    }
+
+    public void nothingToDoHere() {
+        Snackbar.make(findViewById(R.id.main_drawer_layout), "I'm a Snackbar", Snackbar.LENGTH_LONG).show();
+    }
 }
+

@@ -9,7 +9,7 @@ import android.widget.Button;
 /**
  * Created by alex on 3/3/16.
  */
-public class AboutDialog extends AppCompatDialog{
+public class AboutDialog extends AppCompatDialog {
 
     Activity activity;
     Button btn;

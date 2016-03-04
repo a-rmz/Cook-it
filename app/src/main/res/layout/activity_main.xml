@@ -15,7 +15,7 @@
         android:layout_height="match_parent" />
 
     <include
-        android:id="@+id/main_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,6 +26,7 @@
                   android:paddingLeft="@dimen/activity_horizontal_margin"
                   android:paddingRight="@dimen/activity_horizontal_margin"
                   android:paddingTop="@dimen/activity_vertical_margin"
+                  android:background="@color/main_background"
                   tools:context=".MainActivity">
 
         <ScrollView
@@ -39,26 +40,50 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:src="@drawable/icon_user_blue"
                     />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:src="@drawable/icon_user_blue"
                     />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:src="@drawable/icon_user_blue"
                     />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/icon_user_blue"
+                    />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/icon_user_blue"
+                    />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/icon_user_blue"
+                    />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/icon_user_blue"
+                    />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:src="@drawable/icon_user_blue"
                     />
 
@@ -76,6 +101,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header"
         app:menu="@menu/actions_drawer"/>
-
 
 </android.support.v4.widget.DrawerLayout>

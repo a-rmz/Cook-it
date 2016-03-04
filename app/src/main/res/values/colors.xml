@@ -6,5 +6,6 @@
     <color name="drawerBackground">#EBEBEB</color>
     <color name="drawerDivider">#D9D9D9D9</color>
     <color name="loginBackground">#FFA91F</color>
-    <color name="user_detail">#FFFFFFFF</color>
+    <color name="user_detail">#FFFFFF</color>
+    <color name="main_background">#EDDDA6</color>
 </resources>

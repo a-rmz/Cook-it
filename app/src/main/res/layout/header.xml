@@ -6,13 +6,18 @@
               android:layout_height="@dimen/header_height"
               android:gravity="bottom"
               android:padding="10dp"
-              android:background="@drawable/user_banner">
+              android:background="@drawable/user_banner_1">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:paddingLeft="30dp"
-        android:src="@drawable/icon_user_blue"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/usr_pic"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFFFFF"/>
 
     <TextView
         android:id="@+id/user_drawer"
