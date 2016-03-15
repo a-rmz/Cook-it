@@ -39,12 +39,6 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
 
-        taco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
 
     }
 
