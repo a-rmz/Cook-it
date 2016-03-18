@@ -10,3 +10,6 @@ Usar Cook it! hará más atractiva la cocina para todo el público, ya que con s
 ###Link to Java classes
 ----------
 [Java classes](../master/app/src/main/java/com/dangerducks/cookit)
+
+###Link to latest release!
+[Latest release](../master/app/build/outputs/apk/app-debug.apk)
