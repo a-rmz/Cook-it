@@ -12,4 +12,6 @@
     <string name="close_drawer">Close</string>
     <string name="configuration">Configuration</string>
     <string name="about">About</string>
+
+    <string name="card">Card</string>
 </resources>
