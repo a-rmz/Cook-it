@@ -8,5 +8,5 @@ public class Unit {
     public static final int METRIC = 0x00;
     public static final int IMPERIAL = 0x01;
 
-    
+
 }
