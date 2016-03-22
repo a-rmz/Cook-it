@@ -14,5 +14,8 @@
     <string name="configuration">Configuration</string>
     <string name="about">About</string>
 
+    <string name="register_caption">Register a new user</string>
+    <string name="pass_instructions">The password must not be longer than 25 characters</string>
+
     <string name="card">Card</string>
 </resources>

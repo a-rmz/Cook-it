@@ -10,6 +10,16 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:background="@color/loginBackground">
 
+    <TextView
+        android:id="@+id/register_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/register_caption"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/icon_user"
             android:hint="@string/hint_usr"
             android:inputType="text"
             android:textColorHint="@android:color/white"
@@ -37,18 +46,26 @@
             android:id="@+id/email_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/pass_instruct"
+            android:text="@string/pass_instructions"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"/>
 
         <EditText
             android:id="@+id/pass_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/icon_pass"
+            android:layout_marginBottom="40dp"
             android:hint="@string/hint_pass"
             android:inputType="textPassword"
             android:textColorHint="@android:color/white"
@@ -58,9 +75,9 @@
             android:id="@+id/signin"
             style="@style/loginButton"
             android:text="@string/action_signin"
+            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
