@@ -38,7 +38,16 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void validate(String username, String password, String email) {
-        
+
+    }
+
+    private boolean validateUsername(String user) {
+        return true;
+    }
+
+    private boolean validatePassword(String pass) {
+        if(!pass.isEmpty() && pass.length() <= 25) return true;
+        return false;
     }
 
 }
