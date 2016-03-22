@@ -7,11 +7,15 @@
     <string name="action_credits">Credits</string>
     <string name="hint_usr">Username</string>
     <string name="hint_pass">Password</string>
+    <string name="hint_email">E-mail</string>
     <string name="copyright">All rights reserved © Danger Ducks 2016</string>
     <string name="open_drawer">Menu</string>
     <string name="close_drawer">Close</string>
     <string name="configuration">Configuration</string>
     <string name="about">About</string>
+
+    <string name="register_caption">Register a new user</string>
+    <string name="pass_instructions">The password must not be longer than 25 characters</string>
 
     <string name="card">Card</string>
 </resources>
