@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Click", Snackbar.LENGTH_SHORT).show();
+                addRecipe();
             }
         });
 
@@ -140,6 +140,10 @@ public class MainActivity extends AppCompatActivity{
 
     public void nothingToDoHere() {
         Snackbar.make(findViewById(R.id.main_drawer_layout), "I'm a Snackbar", Snackbar.LENGTH_LONG).show();
+    }
+
+    private void addRecipe() {
+
     }
 }
 

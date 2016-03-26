@@ -18,4 +18,7 @@
     <string name="pass_instructions">The password must not be longer than 25 characters</string>
 
     <string name="card">Card</string>
+
+    <!-- Add recipe -->
+    <string name="recipe_name_caption">Recipe name:</string>
 </resources>

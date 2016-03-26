@@ -5,7 +5,7 @@
       <!-- Search / will display always -->
       <item android1:id="@+id/action_search"
             android1:title="@string/action_search"
-            android1:icon="@android:drawable/ic_menu_search"
+            android1:icon="@drawable/ic_search_white_24dp"
             android:showAsAction="ifRoom"/>
 
       <item android1:id="@+id/action_settings"

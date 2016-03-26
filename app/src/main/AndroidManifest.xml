@@ -20,10 +20,14 @@
         <activity android:name=".MainActivity"
                   android:label="">
         </activity>
+
         <activity android:name=".SignIn"
                   android:label="">
         </activity>
 
+        <activity android:name=".AddRecipe"
+                  android:label="">
+        </activity>
 
     </application>
 
