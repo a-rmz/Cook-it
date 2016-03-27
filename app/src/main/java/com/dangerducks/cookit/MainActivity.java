@@ -170,7 +170,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void addRecipe() {
-
+        Intent intent = new Intent(MainActivity.this, AddRecipe.class);
+        startActivity(intent);
     }
 }
 

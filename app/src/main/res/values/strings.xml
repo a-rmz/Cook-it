@@ -26,5 +26,6 @@
     <string name="card">Card</string>
 
     <!-- Add recipe -->
+    <string name="add_recipe_title">Add new recipe</string>
     <string name="recipe_name_caption">Recipe name:</string>
 </resources>
