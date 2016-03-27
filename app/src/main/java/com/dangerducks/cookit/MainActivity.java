@@ -2,6 +2,7 @@ package com.dangerducks.cookit;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.dangerducks.cookit.utils.FileManager;
 
 
 /**
@@ -51,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
 
-
     }
 
 
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity{
 
                 switch (menuItem.getItemId()) {
                     case R.id.nav_close_session:
-                        Login.deleteUserData(MainActivity.this);
+                        FileManager.deleteUserData(MainActivity.this);
                         Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
                         finish();
@@ -95,6 +98,16 @@ public class MainActivity extends AppCompatActivity{
                 return false;
             }
         });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.main_drawer);
+        View header = navigationView.getHeaderView(0);
+
+        TextView tv = (TextView) header.findViewById(R.id.user_drawer);
+        tv.setText(User.user().getUsername());
+
+        tv = (TextView) header.findViewById(R.id.email_drawer);
+        tv.setText(User.user().getEmail());
+
 
     }
 

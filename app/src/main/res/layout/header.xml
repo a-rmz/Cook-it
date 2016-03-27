@@ -27,9 +27,11 @@
         android:layout_height="wrap_content"
         android:text="@string/hint_usr"
         android:textStyle="bold"
+        android:textSize="16sp"
         android:textColor="@color/user_detail"/>
 
     <TextView
+        android:id="@+id/email_drawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"

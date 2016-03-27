@@ -1,10 +1,13 @@
 package com.dangerducks.cookit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.dangerducks.cookit.utils.FileManager;
 
 /**
  * Created by alex on 3/21/16.
@@ -32,13 +35,27 @@ public class SignIn extends AppCompatActivity {
                 String password = pass.getText().toString();
                 String email = mail.getText().toString();
 
-                validate(username, password, email);
+                if(validate(username, password, email)) {
+                    FileManager.saveUserData(SignIn.this, username, password, email);
+                    Intent intent = new Intent(SignIn.this, Login.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
 
-    private void validate(String username, String password, String email) {
-
+    private boolean validate(String username, String password, String email) {
+        if(
+            validateUsername(username) &&
+            validatePassword(password) &&
+            validateEmail(email)
+          ) {
+            User.user().setUsername(username);
+            User.user().setEmail(email);
+            return true;
+        }
+        return false;
     }
 
     private boolean validateUsername(String user) {
@@ -48,6 +65,10 @@ public class SignIn extends AppCompatActivity {
     private boolean validatePassword(String pass) {
         if(!pass.isEmpty() && pass.length() <= 25) return true;
         return false;
+    }
+
+    private boolean validateEmail(String email) {
+        return true;
     }
 
 }
