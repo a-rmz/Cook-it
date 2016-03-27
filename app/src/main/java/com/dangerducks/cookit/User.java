@@ -31,11 +31,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        do {
-            this.username = username;
-            if(username.length() > 0) break;
-            // Some "invalid username" message here
-        } while (username.length() <= 0); // Repeat while the username is empty
+        this.username = username;
     }
 
     /**
