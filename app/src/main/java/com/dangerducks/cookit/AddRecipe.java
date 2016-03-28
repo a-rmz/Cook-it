@@ -154,6 +154,7 @@ public class AddRecipe extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         ((LinearLayout) step.getParent()).removeView(step);
+                        stepsAdded--;
                     }
                 });
 
