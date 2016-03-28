@@ -9,6 +9,7 @@ import java.util.Vector;
 public class Preparation {
 
     Vector<Step> steps;
+    Vector<Ingredient> ingredients;
     int actualStep;
     int preparationTime;
 
@@ -34,5 +35,13 @@ public class Preparation {
 
     }
 
+    void addStep(Step step){
+        steps.add(step);
+
+    }
+
+    void addIngredient(Ingredient ingredient){
+        ingredients.add(ingredient);
+    }
 
 }
