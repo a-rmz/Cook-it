@@ -3,6 +3,7 @@ package com.dangerducks.cookit;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,7 +45,12 @@ public class AddStep extends AppCompatDialog {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                String duration = ((EditText) findViewById(R.id.duration)).getText().toString();
+                if(!duration.isEmpty() && ingredientsAdded > 0) {
+                    dismiss();
+                } else {
+                    Snackbar.make(v, activity.getResources().getString(R.string.empty_time), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -92,6 +99,7 @@ public class AddStep extends AppCompatDialog {
                         @Override
                         public void onClick(View v) {
                             ((LinearLayout) ingredient.getParent()).removeView(ingredient);
+                            ingredientsAdded--;
                         }
                     });
 
