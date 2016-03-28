@@ -39,6 +39,7 @@ public class AddRecipe extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     Spinner categories;
+    int stepsAdded = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +148,10 @@ public class AddRecipe extends AppCompatActivity {
                 final View step = inflater.inflate(R.layout.add_recipe_step, null);
 
                 TextView textOut = (TextView) step.findViewById(R.id.step);
+                if (text.getText().toString().length() == 0) {
+                    Snackbar.make(v, getResources().getString(R.string.empty_step), Snackbar.LENGTH_LONG).show();
+                    return;
+                }
                 textOut.setText(text.getText().toString());
 
                 Button remove = (Button) step.findViewById(R.id.remove_step_btn);
@@ -158,6 +163,7 @@ public class AddRecipe extends AppCompatActivity {
                 });
 
                 container.addView(step);
+                stepsAdded++;
 
                 text.setText("");
             }
@@ -193,7 +199,7 @@ public class AddRecipe extends AppCompatActivity {
         }
         switch (menuItem.getItemId()) {
             case R.id.action_save:
-                nothingToDoHere();
+                saveRecipe();
                 return true;
             case R.id.action_clear:
                 clearRecipe();
@@ -230,6 +236,23 @@ public class AddRecipe extends AppCompatActivity {
         Intent intent = new Intent(AddRecipe.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void saveRecipe() {
+        String name = ((TextView) findViewById(R.id.recipe_name)).getText().toString();
+        String portions = ((TextView) findViewById(R.id.portions)).getText().toString();
+        String calories = ((TextView) findViewById(R.id.calories)).getText().toString();
+        LinearLayout container = (LinearLayout) findViewById(R.id.step_container);
+
+        if(name.isEmpty() || portions.isEmpty() || calories.isEmpty() || stepsAdded == 0) {
+            Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.empty_recipe), Snackbar.LENGTH_LONG);
+        } else {
+            nothingToDoHere();
+            goBack();
+        }
+
+
+
     }
 
     public void nothingToDoHere() {
