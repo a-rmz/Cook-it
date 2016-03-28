@@ -32,19 +32,100 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="25dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/recipe_name"
                 android:layout_below="@+id/recipe_name_caption"
                 android:inputType="text"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            
+
+            <LinearLayout
+                android:id="@+id/tv"
+                android:layout_below="@id/recipe_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/portions_caption"
+                    android:text="@string/portions_caption"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/calories_caption"
+                    android:layout_below="@id/recipe_name"
+                    android:layout_toRightOf="@id/portions_caption"
+                    android:text="@string/calories_caption"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/et"
+                android:layout_below="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/portions"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/calories"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/category_caption"
+                android:layout_below="@+id/et"
+                android:text="@string/category_caption"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/categories"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/category_caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </Spinner>
 
 
         </RelativeLayout>

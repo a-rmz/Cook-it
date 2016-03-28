@@ -83,9 +83,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-
                 switch (menuItem.getItemId()) {
                     case R.id.nav_close_session:
                         FileManager.deleteUserData(MainActivity.this);

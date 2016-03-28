@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories">
+        <item>Mexican</item>
+        <item>Oriental</item>
+        <item>Italian</item>
+        <item>French</item>
+        <item>Soup</item>
+        <item>Seafood</item>
+        <item>Desserts</item>
+        <item>Beverages</item>
+    </string-array>
+
+</resources>

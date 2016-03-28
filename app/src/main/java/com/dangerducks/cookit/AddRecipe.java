@@ -11,10 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dangerducks.cookit.utils.FileManager;
@@ -27,6 +31,7 @@ public class AddRecipe extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
+    Spinner categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,21 @@ public class AddRecipe extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.add_drawer_layout);
         setUpDrawer();
+
+        categories = (Spinner) findViewById(R.id.categories);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+        categories.setAdapter(adapter);
+        categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setUpDrawer() {
@@ -61,9 +81,6 @@ public class AddRecipe extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
 
                 switch (menuItem.getItemId()) {
                     case R.id.nav_close_session:
@@ -92,7 +109,9 @@ public class AddRecipe extends AppCompatActivity {
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         toolbar.inflateMenu(R.menu.main_activity_actions);
 

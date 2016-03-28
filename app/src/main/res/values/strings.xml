@@ -28,4 +28,7 @@
     <!-- Add recipe -->
     <string name="add_recipe_title">Add new recipe</string>
     <string name="recipe_name_caption">Recipe name:</string>
+    <string name="calories_caption">Calories</string>
+    <string name="portions_caption">Portions</string>
+    <string name="category_caption">Category</string>
 </resources>
