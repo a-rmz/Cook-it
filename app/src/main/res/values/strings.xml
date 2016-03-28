@@ -30,7 +30,9 @@
 
     <!-- Add recipe -->
     <string name="add_recipe_title">Add new recipe</string>
-    <string name="recipe_name_caption">Recipe name:</string>
+    <string name="recipe_name_caption">Recipe name</string>
+    <string name="duration_caption">Duration</string>
+    <string name="duration_hint">Start adding steps to calculate duration</string>
     <string name="calories_caption">Calories</string>
     <string name="portions_caption">Portions</string>
     <string name="category_caption">Category</string>
