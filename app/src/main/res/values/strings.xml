@@ -39,5 +39,5 @@
     <string name="add_step">Add step</string>
     <string name="remove_step">Remove step</string>
     <string name="empty_step">You can\'t enter an empty step...</string>
-    <string name="empty_recipe">You can\'t enter an empty recipe...</string>
+    <string name="empty_recipe">You\'re missing something...</string>
 </resources>

@@ -233,8 +233,6 @@ public class AddRecipe extends AppCompatActivity {
     }
 
     private void goBack() {
-        Intent intent = new Intent(AddRecipe.this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -242,16 +240,15 @@ public class AddRecipe extends AppCompatActivity {
         String name = ((TextView) findViewById(R.id.recipe_name)).getText().toString();
         String portions = ((TextView) findViewById(R.id.portions)).getText().toString();
         String calories = ((TextView) findViewById(R.id.calories)).getText().toString();
+        int category = (int) categories.getSelectedItemId();
         LinearLayout container = (LinearLayout) findViewById(R.id.step_container);
 
-        if(name.isEmpty() || portions.isEmpty() || calories.isEmpty() || stepsAdded == 0) {
-            Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.empty_recipe), Snackbar.LENGTH_LONG);
+        if(name.isEmpty() || portions.isEmpty() || calories.isEmpty() || stepsAdded == 0 || category == 0) {
+            Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.empty_recipe), Snackbar.LENGTH_LONG).show();
         } else {
             nothingToDoHere();
             goBack();
         }
-
-
 
     }
 
