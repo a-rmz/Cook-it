@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.dangerducks.cookit.kitchen.Ingredient;
+import com.dangerducks.cookit.kitchen.Recipe;
+import com.dangerducks.cookit.kitchen.Step;
+
 /**
  * Created by alex on 3/27/16.
  */
@@ -23,14 +26,18 @@ public class AddStep extends AppCompatDialog {
 
     Activity activity;
     Spinner ingredients;
-    String step;
+    String stepName;
+    Step step;
+    Recipe recipe;
     Button done;
     int ingredientsAdded = 0;
 
-    public AddStep(Activity activity, String step) {
+    public AddStep(Activity activity, String stepName, Recipe recipe) {
         super(activity);
         this.activity = activity;
-        this.step = step;
+        this.stepName = stepName;
+        step = new Step();
+        this.recipe = recipe;
     }
 
     @Override
@@ -39,7 +46,7 @@ public class AddStep extends AppCompatDialog {
         setContentView(R.layout.add_step);
 
         TextView stepDescription = (TextView) findViewById(R.id.step_description);
-        stepDescription.setText(step);
+        stepDescription.setText(stepName);
 
         done = (Button) findViewById(R.id.finish_add_ingredient);
         done.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +54,7 @@ public class AddStep extends AppCompatDialog {
             public void onClick(View v) {
                 String duration = ((EditText) findViewById(R.id.duration)).getText().toString();
                 if(!duration.isEmpty() && ingredientsAdded > 0) {
+                    recipe.addStep(step);
                     dismiss();
                 } else {
                     Snackbar.make(v, activity.getResources().getString(R.string.empty_time), Snackbar.LENGTH_LONG).show();
@@ -61,7 +69,7 @@ public class AddStep extends AppCompatDialog {
     }
 
     private void setupSpinner() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(), R.array.ingredients, R.layout.spinner_element);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(), R.array.ingredients, R.layout.spinner_element);
         ingredients.setAdapter(adapter);
         ingredients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -87,23 +95,25 @@ public class AddStep extends AppCompatDialog {
 
                 if(ingredients.getSelectedItemId() != 0) {
                     LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    final View ingredient = inflater.inflate(R.layout.add_step_ingredient, null);
+                    final View view = inflater.inflate(R.layout.add_step_ingredient, null);
 
-                    TextView textOut = (TextView) ingredient.findViewById(R.id.ingredient);
+                    TextView textOut = (TextView) view.findViewById(R.id.ingredient);
 
-                    String ing = ingredients.getSelectedItem().toString();
-                    textOut.setText(ing);
+                    String ingredientName = ingredients.getSelectedItem().toString();
+                    Ingredient ingredient = new Ingredient(ingredientName);
+                    textOut.setText(ingredientName);
 
-                    Button remove = (Button) ingredient.findViewById(R.id.remove_ingredient_btn);
+                    Button remove = (Button) view.findViewById(R.id.remove_ingredient_btn);
                     remove.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ((LinearLayout) ingredient.getParent()).removeView(ingredient);
-                            ingredientsAdded--;
+                            ((LinearLayout) view.getParent()).removeView(view);
+                            step.removeIngredient(ingredientsAdded--);
                         }
                     });
 
-                    container.addView(ingredient);
+                    step.addIngredient(ingredient);
+                    container.addView(view);
                     ingredientsAdded++;
 
                 }

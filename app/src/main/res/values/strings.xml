@@ -49,6 +49,8 @@
     <string name="finish_add_ingredient">Done</string>
     <string name="step_duration_caption">Step duration:</string>
 
+    <string name="recipe_saved">The recipe was saved successfully</string>
+
     <!-- Show step -->
     <string name="empty_step_description">This is an empty step description template</string>
     <string name="step_number">Step </string>

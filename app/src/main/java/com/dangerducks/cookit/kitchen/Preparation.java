@@ -33,5 +33,12 @@ public class Preparation {
 
     }
 
+    void addStep(Step step) {
+        steps.add(step);
+    }
+
+    void removeStep(int index) {
+        steps.remove(index);
+    }
 
 }

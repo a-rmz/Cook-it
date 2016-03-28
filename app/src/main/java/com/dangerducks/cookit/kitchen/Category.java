@@ -14,8 +14,8 @@ public class Category {
     public static int recipeQuantity;
     Vector<Recipe> recipes;
 
-    public Category() {
-
+    public Category(String name) {
+        this.name = name;
     }
 
     void sortRecipes() {

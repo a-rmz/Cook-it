@@ -6,7 +6,7 @@ import java.io.*;
  */
 public class Recipe implements Serializable {
 
-    private static int RID;
+    private static int RID = -1;
 
     String name;
     int calories;
@@ -18,11 +18,43 @@ public class Recipe implements Serializable {
     Preparation preparation;
 
     public Recipe() {
-
+        preparation = new Preparation();
     }
 
-    void changePortions(int portions) {
+    public void setRID() {
+        RID = RID++;
+    }
+
+    public void setPortions(int portions) {
         this.portions = portions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public int getPortions() {
+        return portions;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     void rate(int rating) {
@@ -41,7 +73,7 @@ public class Recipe implements Serializable {
         return false;
     }
 
-    boolean saveRecipe(){
+    public boolean saveRecipe(){
 
         String fileName = RID + ".obj";
         try {
@@ -59,7 +91,7 @@ public class Recipe implements Serializable {
 
     }
 
-    Recipe loadRecipe(int ID){
+    public Recipe loadRecipe(int ID){
         String fileName = ID + ".obj";
         Recipe aux = new Recipe();
         try {
@@ -73,6 +105,14 @@ public class Recipe implements Serializable {
         }
 
         return aux;
+    }
+
+    public void addStep(Step step) {
+        this.preparation.addStep(step);
+    }
+
+    public void removeStep(int index) {
+        this.preparation.removeStep(index);
     }
 
 }
