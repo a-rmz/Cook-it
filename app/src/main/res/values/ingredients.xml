@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ingredients">
+        <item>-- select one --</item>
+        <item>Tortilla</item>
+        <item>Tomato sauce</item>
+        <item>Chicken meat</item>
+        <item>Cheese</item>
+        <item>Oil</item>
+    </string-array>
+
+</resources>

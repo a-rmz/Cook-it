@@ -40,4 +40,8 @@
     <string name="remove_step">Remove step</string>
     <string name="empty_step">You can\'t enter an empty step...</string>
     <string name="empty_recipe">You\'re missing something...</string>
+
+    <string name="add_ingredient">Add ingredient</string>
+    <string name="remove_ingredient">Remove</string>
+    <string name="finish_add_ingredient">Done</string>
 </resources>

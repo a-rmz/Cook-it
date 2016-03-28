@@ -1,10 +1,8 @@
 package com.dangerducks.cookit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,8 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dangerducks.cookit.utils.FileManager;
-
-import java.util.LinkedHashMap;
 
 /**
  * Created by alex on 3/25/16.
@@ -165,12 +160,20 @@ public class AddRecipe extends AppCompatActivity {
                 container.addView(step);
                 stepsAdded++;
 
+                addIngredients(text.getText().toString());
                 text.setText("");
             }
         });
 
 
     }
+
+    private void addIngredients(String step) {
+        AddStep addStep = new AddStep(this, step);
+        addStep.setTitle(step);
+        addStep.show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
