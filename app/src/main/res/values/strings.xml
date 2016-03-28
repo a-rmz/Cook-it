@@ -2,13 +2,22 @@
     <string name="app_name">Cook it!</string>
     <string name="action_login">Log in</string>
     <string name="action_signin">Sign in</string>
+    <string name="save_user">Save login data</string>
+
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
     <string name="action_credits">Credits</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
+
     <string name="hint_usr">Username</string>
     <string name="hint_pass">Password</string>
     <string name="hint_email">E-mail</string>
+    <string name="wrong_data">Wrong username/password</string>
+
     <string name="copyright">All rights reserved © Danger Ducks 2016</string>
+
     <string name="open_drawer">Menu</string>
     <string name="close_drawer">Close</string>
     <string name="configuration">Configuration</string>
@@ -20,5 +29,15 @@
     <string name="card">Card</string>
 
     <!-- Add recipe -->
+    <string name="add_recipe_title">Add new recipe</string>
     <string name="recipe_name_caption">Recipe name:</string>
+    <string name="calories_caption">Calories</string>
+    <string name="portions_caption">Portions</string>
+    <string name="category_caption">Category</string>
+    <string name="steps_caption">Steps</string>
+
+    <string name="add_step">Add step</string>
+    <string name="remove_step">Remove step</string>
+    <string name="empty_step">You can\'t enter an empty step...</string>
+    <string name="empty_recipe">You can\'t enter an empty recipe...</string>
 </resources>

@@ -34,6 +34,10 @@
                 android:icon="@drawable/ic_settings_applications_white_24dp"
                 android:id="@+id/nav_settings"
                 android:title="@string/settings"/>
+            <item
+                android:icon="@drawable/ic_power_settings_new_white_24dp"
+                android:id="@+id/nav_close_session"
+                android:title="@string/close_session"/>
         </menu>
     </item>
 

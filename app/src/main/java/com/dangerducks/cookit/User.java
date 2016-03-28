@@ -16,26 +16,35 @@ public class User {
     public static int UID;
 
     String username;
+    String email;
     String name;
     String lastName;
     Picture profilePicture;
     Vector<Ingredient> dislikes;
     ArrayList<Recipe> favourites;
 
-    public User() {
+    private static User instance = new User();
 
+    private User() { }
+
+    public static User user() {
+        return instance;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        do {
-            this.username = username;
-            if(username.length() > 0) break;
-            // Some "invalid username" message here
-        } while (username.length() <= 0); // Repeat while the username is empty
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

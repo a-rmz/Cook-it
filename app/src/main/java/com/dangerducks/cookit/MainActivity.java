@@ -1,6 +1,8 @@
 package com.dangerducks.cookit;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -9,11 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.dangerducks.cookit.utils.FileManager;
 
 
 /**
@@ -49,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
 
-
     }
 
 
@@ -76,11 +81,30 @@ public class MainActivity extends AppCompatActivity{
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_close_session:
+                        FileManager.deleteUserData(MainActivity.this);
+                        Intent intent = new Intent(MainActivity.this, Login.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
 
                 return false;
             }
         });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.main_drawer);
+        View header = navigationView.getHeaderView(0);
+
+        TextView tv = (TextView) header.findViewById(R.id.user_drawer);
+        tv.setText(User.user().getUsername());
+
+        tv = (TextView) header.findViewById(R.id.email_drawer);
+        tv.setText(User.user().getEmail());
+
 
     }
 
@@ -143,7 +167,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void addRecipe() {
-
+        Intent intent = new Intent(MainActivity.this, AddRecipe.class);
+        startActivity(intent);
     }
 }
 
