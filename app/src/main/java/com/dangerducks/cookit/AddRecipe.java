@@ -1,6 +1,7 @@
 package com.dangerducks.cookit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -12,16 +13,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dangerducks.cookit.utils.FileManager;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by alex on 3/25/16.
@@ -42,25 +49,15 @@ public class AddRecipe extends AppCompatActivity {
         setupToolbar();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.add_drawer_layout);
-        setUpDrawer();
+        setupDrawer();
 
         categories = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_dropdown_item);
-        categories.setAdapter(adapter);
-        categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        setupSpinner();
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        setupStepAdder();
     }
 
-    private void setUpDrawer() {
+    private void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.add_drawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
@@ -113,7 +110,7 @@ public class AddRecipe extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        toolbar.inflateMenu(R.menu.main_activity_actions);
+        toolbar.inflateMenu(R.menu.add_recipe_actions);
 
         // Home menu for header
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -121,11 +118,58 @@ public class AddRecipe extends AppCompatActivity {
 
     }
 
+    private void setupSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+        categories.setAdapter(adapter);
+        categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void setupStepAdder() {
+        Button add = (Button) findViewById(R.id.add_step_btn);
+        final LinearLayout container = (LinearLayout) findViewById(R.id.step_container);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText text = (EditText) findViewById(R.id.add_step);
+
+                LayoutInflater inflater = (LayoutInflater) AddRecipe.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View step = inflater.inflate(R.layout.add_recipe_step, null);
+
+                TextView textOut = (TextView) step.findViewById(R.id.step);
+                textOut.setText(text.getText().toString());
+
+                Button remove = (Button) step.findViewById(R.id.remove_step_btn);
+                remove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((LinearLayout) step.getParent()).removeView(step);
+                    }
+                });
+
+                container.addView(step);
+
+                text.setText("");
+            }
+        });
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
+        inflater.inflate(R.menu.add_recipe_actions, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -148,8 +192,14 @@ public class AddRecipe extends AppCompatActivity {
             return true;
         }
         switch (menuItem.getItemId()) {
-            case R.id.action_search:
+            case R.id.action_save:
                 nothingToDoHere();
+                return true;
+            case R.id.action_clear:
+                clearRecipe();
+                return true;
+            case R.id.action_delete:
+                goBack();
                 return true;
             case R.id.action_credits:
                 AboutDialog aboutDialog = new AboutDialog(this);
@@ -163,7 +213,26 @@ public class AddRecipe extends AppCompatActivity {
         }
     }
 
+    private void clearRecipe() {
+        TextView textView = (TextView) findViewById(R.id.recipe_name);
+        textView.setText("");
+
+        textView = (TextView) findViewById(R.id.portions);
+        textView.setText("");
+
+        textView = (TextView) findViewById(R.id.calories);
+        textView.setText("");
+
+        ((LinearLayout) findViewById(R.id.step_container)).removeAllViews();
+    }
+
+    private void goBack() {
+        Intent intent = new Intent(AddRecipe.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void nothingToDoHere() {
-        Snackbar.make(findViewById(R.id.main_drawer_layout), "These are not the droids you're looking for...", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.add_drawer_layout), "These are not the droids you're looking for...", Snackbar.LENGTH_LONG).show();
     }
 }

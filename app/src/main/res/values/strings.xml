@@ -7,6 +7,9 @@
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
     <string name="action_credits">Credits</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
 
     <string name="hint_usr">Username</string>
     <string name="hint_pass">Password</string>
@@ -31,4 +34,8 @@
     <string name="calories_caption">Calories</string>
     <string name="portions_caption">Portions</string>
     <string name="category_caption">Category</string>
+    <string name="steps_caption">Steps</string>
+
+    <string name="add_step">Add step</string>
+    <string name="remove_step">Remove step</string>
 </resources>

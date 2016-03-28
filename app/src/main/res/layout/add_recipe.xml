@@ -122,10 +122,41 @@
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/category_caption"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/step_adder"
+                android:layout_below="@id/categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/add_step"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/add_step_btn"
+                    android:text="@string/add_step"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!-- Steps container -->
+            <ScrollView
+                android:layout_below="@id/step_adder"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
-            </Spinner>
+                <LinearLayout
+                    android:id="@+id/step_container"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></LinearLayout>
+            </ScrollView>
 
 
         </RelativeLayout>
