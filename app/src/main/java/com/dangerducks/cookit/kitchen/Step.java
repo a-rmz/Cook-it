@@ -12,15 +12,17 @@ public class Step {
 
     String description;
     int time;
-<<<<<<< HEAD
-    String instruction;
-=======
     Image image;
     Unit unit;
     Vector<Ingredient> ingredients;
 
     public Step() {
         ingredients = new Vector<>();
+    }
+
+    public Step(String description){
+        super();
+        this.description = description;
     }
 
     public String getDescription() {
@@ -38,20 +40,12 @@ public class Step {
     public void setTime(int time) {
         this.time = time;
     }
->>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
 
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
 
-<<<<<<< HEAD
-    public Step(String instruction){
-        this.instruction = instruction;
-    }
-
-=======
     public void removeIngredient(int index) {
         ingredients.remove(index);
     }
->>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
 }
