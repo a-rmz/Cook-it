@@ -8,6 +8,7 @@ import java.util.Vector;
 public class Preparation {
 
     Vector<Step> steps;
+    Vector<Ingredient> ingredients;
     int actualStep;
     int preparationTime;
 
@@ -33,13 +34,17 @@ public class Preparation {
     void changeUnits() {
 
     }
-
+ 
     void addStep(Step step) {
         steps.add(step);
     }
 
     void removeStep(int index) {
         steps.remove(index);
+    }
+
+    void addIngredient(Ingredient ingredient){
+        ingredients.add(ingredient);
     }
 
 }

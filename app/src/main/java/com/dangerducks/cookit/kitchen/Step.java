@@ -1,5 +1,8 @@
 package com.dangerducks.cookit.kitchen;
 
+
+import android.media.Image;
+
 import java.util.Vector;
 
 /**
@@ -9,6 +12,8 @@ public class Step {
 
     String description;
     int time;
+    Image image;
+    Unit unit;
     Vector<Ingredient> ingredients;
 
     public Step() {
