@@ -25,11 +25,6 @@ public class Recipe implements Serializable {
         preparation = new Preparation();
     }
 
-    public void setRID() {
-        RID = RID++;
-    }
-
-<<<<<<< HEAD
     public Recipe(String name, Preparation preparation){
 
         this.preparation = preparation;
@@ -41,10 +36,11 @@ public class Recipe implements Serializable {
         favourite = false;
     }
 
-    void changePortions(int portions) {
-=======
+    public void setRID() {
+        RID = RID++;
+    }
+
     public void setPortions(int portions) {
->>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
         this.portions = portions;
     }
 
@@ -91,36 +87,6 @@ public class Recipe implements Serializable {
         if((rating >= 0) && (rating <= 5)) return true;
         return false;
     }
-
-<<<<<<< HEAD
-=======
-    public boolean saveRecipe(){
->>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
-
-
-
-<<<<<<< HEAD
-=======
-        return false;
-
-    }
-
-    public Recipe loadRecipe(int ID){
-        String fileName = ID + ".obj";
-        Recipe aux = new Recipe();
-        try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
-            aux = (Recipe)in.readObject();
-            in.close();
-
-        } catch (IOException | ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return aux;
-    }
->>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
 
     public void addStep(Step step) {
         this.preparation.addStep(step);
