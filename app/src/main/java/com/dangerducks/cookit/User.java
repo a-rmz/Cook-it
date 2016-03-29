@@ -21,6 +21,7 @@ public class User {
     String lastName;
     Picture profilePicture;
     Vector<Ingredient> dislikes;
+    Vector<Recipe> recipesSaved;
     ArrayList<Recipe> favourites;
 
     private static User instance = new User();
