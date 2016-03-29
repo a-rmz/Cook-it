@@ -1,7 +1,6 @@
 package com.dangerducks.cookit.kitchen;
 
-import java.util.ArrayList;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by alex on 3/18/16.
@@ -37,11 +36,24 @@ public class Preparation {
 
     void addStep(Step step){
         steps.add(step);
+    }
 
+    void deleteStep(Step step){
+        steps.remove(step);
     }
 
     void addIngredient(Ingredient ingredient){
         ingredients.add(ingredient);
+    }
+
+    int getCalories(){
+        int totalCalories = 0;
+
+        for (Ingredient i : ingredients) {
+            totalCalories += i.calories;
+        }
+        
+        return totalCalories;
     }
 
 }

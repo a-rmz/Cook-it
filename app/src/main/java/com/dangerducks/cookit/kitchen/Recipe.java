@@ -3,22 +3,37 @@ package com.dangerducks.cookit.kitchen;
 import java.io.*;
 /**
  * Created by alex on 3/18/16.
+ *
  */
+
+
 public class Recipe implements Serializable {
 
     private static int RID;
 
-    String name;
-    int calories;
-    int portions;
-    int rating;
-    int dificulty;
-    boolean favourite;
-    Category category;
-    Preparation preparation;
+
+    public String name;
+    public int calories;
+    public int portions;
+    public int rating;
+    public int dificulty;
+    public boolean favourite;
+    public Category category;
+    public Preparation preparation;
 
     public Recipe() {
 
+    }
+
+    public Recipe(String name, Preparation preparation){
+
+        this.preparation = preparation;
+        this.name = name;
+        calories = preparation.getCalories();
+        portions = 4;
+        rating = 0;
+        dificulty = 0;
+        favourite = false;
     }
 
     void changePortions(int portions) {
@@ -41,38 +56,8 @@ public class Recipe implements Serializable {
         return false;
     }
 
-    boolean saveRecipe(){
 
-        String fileName = RID + ".obj";
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
-            out.writeObject(this);
-            out.close();
-            return true;
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
-        return false;
-
-    }
-
-    Recipe loadRecipe(int ID){
-        String fileName = ID + ".obj";
-        Recipe aux = new Recipe();
-        try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
-            aux = (Recipe)in.readObject();
-            in.close();
-
-        } catch (IOException | ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return aux;
-    }
 
 }

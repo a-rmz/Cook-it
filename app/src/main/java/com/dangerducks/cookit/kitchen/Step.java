@@ -9,8 +9,10 @@ public class Step {
 
     int time;
     String instruction;
-    Image image;
-    Unit unit; 
 
+
+    public Step(String instruction){
+        this.instruction = instruction;
+    }
 
 }
