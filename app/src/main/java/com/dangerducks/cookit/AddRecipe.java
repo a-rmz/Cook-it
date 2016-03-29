@@ -173,6 +173,10 @@ public class AddRecipe extends AppCompatActivity {
 
                 addIngredients(step.getDescription());
                 text.setText("");
+
+                textOut = (TextView) findViewById(R.id.duration);
+                recipe.setDuration();
+                textOut.setText(recipe.getDuration()+"");
             }
         });
 

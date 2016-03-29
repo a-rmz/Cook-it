@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -52,8 +53,9 @@ public class AddStep extends AppCompatDialog {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String duration = ((EditText) findViewById(R.id.duration)).getText().toString();
+                String duration = ((EditText) findViewById(R.id.add_duration)).getText().toString();
                 if(!duration.isEmpty() && ingredientsAdded > 0) {
+                    step.setTime(Integer.parseInt(duration));
                     recipe.addStep(step);
                     dismiss();
                 } else {
