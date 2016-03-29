@@ -3,16 +3,17 @@ package com.dangerducks.cookit.kitchen;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by alex on 3/18/16.
  */
-public class Step {
+public class Step implements Serializable {
 
     String description;
     int time;
-    Image image;
+    transient Image image;
     Unit unit;
     Vector<Ingredient> ingredients;
 

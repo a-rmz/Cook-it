@@ -1,11 +1,12 @@
 package com.dangerducks.cookit.kitchen;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by alex on 3/18/16.
  */
-public class Category {
+public class Category implements Serializable {
 
     public static int CID;
 

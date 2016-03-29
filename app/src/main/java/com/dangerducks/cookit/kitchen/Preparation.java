@@ -1,10 +1,11 @@
 package com.dangerducks.cookit.kitchen;
 
+import java.io.Serializable;
 import java.util.Vector;
 /**
  * Created by alex on 3/18/16.
  */
-public class Preparation {
+public class Preparation implements Serializable {
 
     Vector<Step> steps;
     Vector<Ingredient> ingredients;
