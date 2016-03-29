@@ -1,4 +1,5 @@
 package com.dangerducks.cookit.utils;
+import com.dangerducks.cookit.kitchen.*;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,11 +7,14 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.*;
 
 /**
  * Created by alex on 3/26/16.
  */
 public class FileManager {
+
+    public static String DIR = "C:\\Users\\rogeliomiguel\\workspace\\SaveRecipe\\bin\\";
 
     public static boolean saveUserData(Context context, String user, String pass, String email) {
         String buffer = user + "\t" + email + "\n" + pass;
@@ -65,4 +69,53 @@ public class FileManager {
 
         return credentials.delete();
     }
+
+    public static String[] openFolder(String path){//DIR
+
+        File folder = new File(path);
+
+        String[] recipes = folder.list(new FilenameFilter(){
+            public boolean accept(File path, String name){
+                return name.toLowerCase().endsWith(".obj");
+            }
+        });
+
+        return recipes;
+    }
+
+    public static Recipe loadRecipe(String name){
+
+        Recipe aux = new Recipe();
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(DIR + name ));
+            aux = (Recipe)in.readObject();
+            in.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            //e.printStackTrace();
+            System.out.println("Receta inexistente");
+        }
+
+        return aux;
+    }
+
+    public static boolean saveRecipe(Recipe recipe){
+
+        String fileName = recipe.name + ".obj";
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DIR + fileName));
+            out.writeObject(recipe);
+            out.close();
+            return true;
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            //e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
 }
