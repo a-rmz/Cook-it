@@ -1,6 +1,10 @@
 package com.dangerducks.cookit.kitchen;
 
+<<<<<<< HEAD
 import java.util.*;
+=======
+import java.util.Vector;
+>>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
 
 /**
  * Created by alex on 3/18/16.
@@ -14,6 +18,7 @@ public class Preparation {
 
     public Preparation() {
         actualStep = 0;
+        steps = new Vector<>();
     }
 
     Step showStep() {
@@ -34,12 +39,17 @@ public class Preparation {
 
     }
 
-    void addStep(Step step){
+    void addStep(Step step) {
         steps.add(step);
     }
 
+<<<<<<< HEAD
     void deleteStep(Step step){
         steps.remove(step);
+=======
+    void removeStep(int index) {
+        steps.remove(index);
+>>>>>>> 7d110677927d02f3fcf87c3d4b368e23fe8e9b4b
     }
 
     void addIngredient(Ingredient ingredient){

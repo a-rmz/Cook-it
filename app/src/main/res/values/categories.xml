@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="categories">
+        <item>-- select one ---</item>
         <item>Mexican</item>
         <item>Oriental</item>
         <item>Italian</item>

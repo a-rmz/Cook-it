@@ -1,10 +1,8 @@
 package com.dangerducks.cookit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,9 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.dangerducks.cookit.kitchen.Category;
+import com.dangerducks.cookit.kitchen.Recipe;
+import com.dangerducks.cookit.kitchen.Step;
 import com.dangerducks.cookit.utils.FileManager;
-
-import java.util.LinkedHashMap;
 
 /**
  * Created by alex on 3/25/16.
@@ -40,6 +38,8 @@ public class AddRecipe extends AppCompatActivity {
     ActionBarDrawerToggle mDrawerToggle;
     Spinner categories;
     int stepsAdded = 0;
+
+    Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class AddRecipe extends AppCompatActivity {
         setupSpinner();
 
         setupStepAdder();
+
+        recipe = new Recipe();
     }
 
     private void setupDrawer() {
@@ -145,32 +147,44 @@ public class AddRecipe extends AppCompatActivity {
                 EditText text = (EditText) findViewById(R.id.add_step);
 
                 LayoutInflater inflater = (LayoutInflater) AddRecipe.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View step = inflater.inflate(R.layout.add_recipe_step, null);
+                final View view = inflater.inflate(R.layout.add_recipe_step, null);
 
-                TextView textOut = (TextView) step.findViewById(R.id.step);
+                Step step = new Step();
+
+                TextView textOut = (TextView) view.findViewById(R.id.step);
                 if (text.getText().toString().length() == 0) {
                     Snackbar.make(v, getResources().getString(R.string.empty_step), Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                textOut.setText(text.getText().toString());
+                step.setDescription(text.getText().toString());
+                textOut.setText(step.getDescription());
 
-                Button remove = (Button) step.findViewById(R.id.remove_step_btn);
+                Button remove = (Button) view.findViewById(R.id.remove_step_btn);
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((LinearLayout) step.getParent()).removeView(step);
+                        ((LinearLayout) view.getParent()).removeView(view);
+                        recipe.removeStep(--stepsAdded);
                     }
                 });
 
-                container.addView(step);
+                container.addView(view);
                 stepsAdded++;
 
+                addIngredients(step.getDescription());
                 text.setText("");
             }
         });
 
 
     }
+
+    private void addIngredients(String step) {
+        AddStep addStep = new AddStep(this, step, recipe);
+        addStep.setTitle(step);
+        addStep.show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -233,8 +247,6 @@ public class AddRecipe extends AppCompatActivity {
     }
 
     private void goBack() {
-        Intent intent = new Intent(AddRecipe.this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -242,16 +254,21 @@ public class AddRecipe extends AppCompatActivity {
         String name = ((TextView) findViewById(R.id.recipe_name)).getText().toString();
         String portions = ((TextView) findViewById(R.id.portions)).getText().toString();
         String calories = ((TextView) findViewById(R.id.calories)).getText().toString();
-        LinearLayout container = (LinearLayout) findViewById(R.id.step_container);
+        int category = (int) categories.getSelectedItemId();
 
-        if(name.isEmpty() || portions.isEmpty() || calories.isEmpty() || stepsAdded == 0) {
-            Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.empty_recipe), Snackbar.LENGTH_LONG);
+        if(name.isEmpty() || portions.isEmpty() || calories.isEmpty() || stepsAdded == 0 || category == 0) {
+            Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.empty_recipe), Snackbar.LENGTH_LONG).show();
         } else {
-            nothingToDoHere();
+            recipe.setName(name);
+            recipe.setPortions(Integer.parseInt(portions));
+            recipe.setCalories(Integer.parseInt(calories));
+            recipe.setCategory(new Category(categories.getSelectedItem().toString()));
+
+            recipe.setRID();
+            recipe.saveRecipe();
+            Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.recipe_saved), Snackbar.LENGTH_LONG).show();
             goBack();
         }
-
-
 
     }
 
