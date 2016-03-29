@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
 
+        User.user().recipesSaved = FileManager.getRecipes();
     }
 
 
