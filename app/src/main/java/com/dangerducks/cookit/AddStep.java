@@ -108,7 +108,7 @@ public class AddStep extends AppCompatDialog {
                         @Override
                         public void onClick(View v) {
                             ((LinearLayout) view.getParent()).removeView(view);
-                            step.removeIngredient(ingredientsAdded--);
+                            step.removeIngredient(--ingredientsAdded);
                         }
                     });
 

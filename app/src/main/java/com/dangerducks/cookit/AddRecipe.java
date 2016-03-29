@@ -164,7 +164,7 @@ public class AddRecipe extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         ((LinearLayout) view.getParent()).removeView(view);
-                        recipe.removeStep(stepsAdded--);
+                        recipe.removeStep(--stepsAdded);
                     }
                 });
 
@@ -256,14 +256,14 @@ public class AddRecipe extends AppCompatActivity {
         String calories = ((TextView) findViewById(R.id.calories)).getText().toString();
         int category = (int) categories.getSelectedItemId();
 
-        recipe.setName(name);
-        recipe.setPortions(Integer.parseInt(portions));
-        recipe.setCalories(Integer.parseInt(calories));
-        recipe.setCategory(new Category(categories.getSelectedItem().toString()));
-
         if(name.isEmpty() || portions.isEmpty() || calories.isEmpty() || stepsAdded == 0 || category == 0) {
             Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.empty_recipe), Snackbar.LENGTH_LONG).show();
         } else {
+            recipe.setName(name);
+            recipe.setPortions(Integer.parseInt(portions));
+            recipe.setCalories(Integer.parseInt(calories));
+            recipe.setCategory(new Category(categories.getSelectedItem().toString()));
+
             recipe.setRID();
             recipe.saveRecipe();
             Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.recipe_saved), Snackbar.LENGTH_LONG).show();

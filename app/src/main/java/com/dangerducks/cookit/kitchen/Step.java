@@ -12,7 +12,7 @@ public class Step {
     Vector<Ingredient> ingredients;
 
     public Step() {
-
+        ingredients = new Vector<>();
     }
 
     public String getDescription() {

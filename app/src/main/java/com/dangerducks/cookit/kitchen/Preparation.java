@@ -13,6 +13,7 @@ public class Preparation {
 
     public Preparation() {
         actualStep = 0;
+        steps = new Vector<>();
     }
 
     Step showStep() {
