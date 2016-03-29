@@ -3,6 +3,7 @@ import com.dangerducks.cookit.kitchen.*;
 
 import android.content.Context;
 import android.util.Log;
+import java.util.Vector;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,5 +118,21 @@ public class FileManager {
         return false;
 
     }
+
+    public static Vector<Recipe> getRecipes(){
+        Vector<Recipe> recipes = new Vector<Recipe>();
+        String[] objects = openFolder(DIR);
+        Recipe aux;
+
+        for(String name: objects){
+            aux = FileManager.loadRecipe(name);
+            recipes.add(aux);
+        }
+
+        return recipes;
+
+    }
+
+
 
 }
