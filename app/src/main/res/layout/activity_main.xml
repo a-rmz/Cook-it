@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.DrawerLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_drawer_layout"
+    android:id="@+id/main_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/AppTheme">
-    <!-- The main content view -->
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <FrameLayout
-        android:id="@+id/main_content_frame"
-        android:layout_marginTop="?attr/actionBarSize"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/main_drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/AppTheme">
+        <!-- The main content view -->
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/main_content_frame"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <ScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/main_background">
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                <LinearLayout
+
+                <android.support.v7.widget.RecyclerView
+
+                    android:id="@+id/card_recipe_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/main_background"
+                    android:padding="@dimen/activity_horizontal_margin"/>
+
+                <!--<LinearLayout
                     android:id="@+id/card_recipe_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/activity_horizontal_margin"
                     android:orientation="vertical">
-                </LinearLayout>
+                </LinearLayout>-->
 
-            </ScrollView>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:background="@color/colorPrimary"
+                    app:backgroundTint="@color/colorPrimary"
+                    android:src="@drawable/ic_add_white_18dp"
+                    style="@style/AppTheme"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:background="@color/colorPrimary"
-                app:backgroundTint="@color/colorPrimary"
-                android:src="@drawable/ic_add_white_18dp"
-                style="@style/AppTheme"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
 
-        </RelativeLayout>
+        </FrameLayout>
 
-    </FrameLayout>
+        <!-- The navigation drawer -->
 
-    <!-- The navigation drawer -->
+        <android.support.design.widget.NavigationView
+            android:id="@+id/main_drawer"
+            android:layout_width="@dimen/drawer_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/header"
+            app:menu="@menu/actions_drawer"/>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/main_drawer"
-        android:layout_width="@dimen/drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/actions_drawer"/>
-
-</android.support.v4.widget.DrawerLayout>
+    </android.support.v4.widget.DrawerLayout>
+</android.support.design.widget.CoordinatorLayout>
