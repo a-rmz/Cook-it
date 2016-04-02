@@ -13,4 +13,4 @@ Usar Cook it! hará más atractiva la cocina para todo el público, ya que con s
 
 ###Link to latest release!
 ----------
-[Latest release](../master/app/build/outputs/apk/)
+[Latest release](https://github.com/a-rmz/Cook-it/releases/tag/v0.1)
