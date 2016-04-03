@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void nothingToDoHere() {
-        Snackbar.make(findViewById(R.id.main_drawer_layout), "I'm a Snackbar", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.main_coordinator_layout), "I'm a Snackbar", Snackbar.LENGTH_LONG).show();
     }
 
     private void addRecipe() {
