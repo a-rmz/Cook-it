@@ -61,6 +61,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         notifyItemRemoved(position);
     }
 
+    public void clear() {
+        recipes.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return recipes.size();

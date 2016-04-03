@@ -57,4 +57,7 @@ public class Preparation implements Serializable {
         return totalCalories;
     }
 
+    public Vector<Step> getSteps() {
+        return this.steps;
+    }
 }

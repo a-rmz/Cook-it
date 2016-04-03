@@ -110,13 +110,25 @@ public class FileManager {
         return aux;
     }
 
+    public static void clearRecipes(String dir) {
+        dir += "/rec/";
+        File path = new File(dir);
+        try {
+            for (File recipe:
+                 path.listFiles()) {
+                recipe.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean saveRecipe(Recipe recipe, String dir){
         dir += "/rec/";
         File path = new File(dir);
         if(!path.exists()) path.mkdir();
 
         String fileName = recipe.getName() + ".obj";
-        Log.v("SAVER", "save name " + fileName);
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dir + fileName));
             out.writeObject(recipe);

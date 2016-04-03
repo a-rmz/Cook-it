@@ -31,6 +31,7 @@ import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.FileManager;
 import com.dangerducks.cookit.utils.RecipeAdapter;
 
+import java.io.File;
 import java.util.Vector;
 
 
@@ -116,6 +117,11 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(intent);
                         finish();
                         break;
+                    case R.id.nav_profile:
+                        User.user().recipesSaved.clear();
+                        adapter.clear();
+                        FileManager.clearRecipes(getFilesDir().getPath());
+                        Snackbar.make(findViewById(R.id.main_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
                 }
 
                 return false;
