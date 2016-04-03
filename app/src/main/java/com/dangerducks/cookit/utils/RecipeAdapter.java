@@ -1,5 +1,6 @@
 package com.dangerducks.cookit.utils;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,6 +30,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
             holder = (CardView) view.findViewById(R.id.recipe_card_layout);
             title = (TextView) view.findViewById(R.id.card_header);
             portions = (TextView) view.findViewById(R.id.card_show_portions);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    
+                }
+            });
         }
     }
 
