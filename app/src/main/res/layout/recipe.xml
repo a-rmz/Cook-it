@@ -72,19 +72,11 @@ style="@style/AppTheme">
 
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/scroll_step_container"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_step_container"
             android:layout_below="@+id/show_step_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/show_step_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
-
-        </ScrollView>
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 
