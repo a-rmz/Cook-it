@@ -17,6 +17,7 @@ public class Recipe implements Serializable {
     public int portions;
     public int rating;
     public int dificulty;
+    int duration;
     public boolean favourite;
     public Category category;
     public Preparation preparation;
@@ -70,6 +71,16 @@ public class Recipe implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public void setDuration() {
+        for(Step step: preparation.steps) {
+            this.duration += step.getTime();
+        }
+    }
+
+    public int getDuration() {
+        return this.duration;
     }
 
     void rate(int rating) {

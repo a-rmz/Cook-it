@@ -21,6 +21,7 @@
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/add_rel_layout"
                         android:padding="@dimen/activity_horizontal_margin"
                         android:background="@color/main_background"
                         android:layout_width="match_parent"

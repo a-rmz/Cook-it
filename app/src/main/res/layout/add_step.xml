@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/duration"
+        android:id="@+id/add_duration"
         android:layout_below="@id/step_duration"
         android:inputType="time"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
 
     <LinearLayout
         android:id="@+id/first_ingredient"
-        android:layout_below="@+id/duration"
+        android:layout_below="@+id/add_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

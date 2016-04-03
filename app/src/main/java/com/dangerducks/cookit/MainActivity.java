@@ -10,13 +10,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.FileManager;
 
 
@@ -53,6 +57,9 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         setUpDrawer();
 
+        User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
+        Log.v("USER RECIPES", "Recipe quant " + User.user().recipesSaved.size());
+        showRecipes();
     }
 
 
@@ -166,7 +173,32 @@ public class MainActivity extends AppCompatActivity{
 
     private void addRecipe() {
         Intent intent = new Intent(MainActivity.this, AddRecipe.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        showRecipes();
+    }
+
+    private void showRecipes() {
+        if(!User.user().recipesSaved.isEmpty()) {
+            Log.v("SHOW RECIPES", "Show recipes called");
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+            LinearLayout container = (LinearLayout) findViewById(R.id.card_recipe_container);
+            container.removeAllViews();
+            View view;
+            TextView header, subtitle;
+            for (Recipe recipe : User.user().recipesSaved) {
+                view = inflater.inflate(R.layout.recipe_card, null);
+                header = (TextView) view.findViewById(R.id.card_header);
+                subtitle = (TextView) view.findViewById(R.id.card_show_portions);
+                header.setText(recipe.getName());
+                subtitle.setText(recipe.getPortions() + " portions");
+                container.addView(view);
+            }
+        }
     }
 }
 

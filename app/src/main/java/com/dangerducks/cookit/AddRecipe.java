@@ -173,6 +173,10 @@ public class AddRecipe extends AppCompatActivity {
 
                 addIngredients(step.getDescription());
                 text.setText("");
+
+                textOut = (TextView) findViewById(R.id.duration);
+                recipe.setDuration();
+                textOut.setText(recipe.getDuration()+"");
             }
         });
 
@@ -265,7 +269,8 @@ public class AddRecipe extends AppCompatActivity {
             recipe.setCategory(new Category(categories.getSelectedItem().toString()));
 
             recipe.setRID();
-            FileManager.saveRecipe(recipe);
+            FileManager.saveRecipe(recipe, getFilesDir().getPath());
+            User.user().recipesSaved.add(recipe);
             Snackbar.make(findViewById(R.id.add_drawer_layout), getResources().getString(R.string.recipe_saved), Snackbar.LENGTH_LONG).show();
             goBack();
         }
