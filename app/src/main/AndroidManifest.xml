@@ -30,6 +30,10 @@
             android:label="@string/add_recipe_title">
         </activity>
 
+        <activity android:name=".ShowRecipe"
+                  android:label="">
+        </activity>
+
     </application>
 
 </manifest>
