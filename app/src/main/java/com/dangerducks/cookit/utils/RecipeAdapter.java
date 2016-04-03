@@ -38,6 +38,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         this.recipes = recipes;
     }
 
+    public void remove(int position) {
+        recipes.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public int getItemCount() {
         return recipes.size();

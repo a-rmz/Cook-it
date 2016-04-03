@@ -31,6 +31,8 @@ import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.FileManager;
 import com.dangerducks.cookit.utils.RecipeAdapter;
 
+import java.util.Vector;
+
 
 /**
  * Created by alex on 2/29/16.
@@ -42,11 +44,10 @@ public class MainActivity extends AppCompatActivity{
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     Toolbar toolbar;
-    private ImageView taco;
     private FloatingActionButton fab;
     RecyclerView recyclerView;
-    SwipeDismissBehavior<FloatingActionButton> swipe;
-    CardView cardView;
+    Vector<Recipe> displayableRecipes;
+    RecipeAdapter adapter;
 
 
     @Override
@@ -54,7 +55,11 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.main_coordinator_layout);
+        recyclerView = (RecyclerView) coordinatorLayout.findViewById(R.id.card_recipe_container);
+        toolbar = (Toolbar) coordinatorLayout.findViewById(R.id.toolbar);
+        fab = (FloatingActionButton) coordinatorLayout.findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,15 +67,14 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setupToolbar();
 
-        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.main_coordinator_layout);
         setUpDrawer();
-
         User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
+        displayableRecipes = User.user().recipesSaved;
 
-        recyclerView = (RecyclerView) findViewById(R.id.card_recipe_container);
+
+        adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
     }
 
@@ -197,7 +201,6 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-        RecipeAdapter adapter = new RecipeAdapter(User.user().recipesSaved);
         recyclerView.setAdapter(adapter);
     }
 
@@ -211,6 +214,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 Snackbar.make(coordinatorLayout, "Done", Snackbar.LENGTH_LONG).show();
+                adapter.remove(viewHolder.getAdapterPosition());
             }
 
         };
