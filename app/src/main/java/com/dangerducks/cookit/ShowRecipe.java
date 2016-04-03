@@ -19,7 +19,7 @@ public class ShowRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe);
 
-/*        recipe = getIntent().getParcelableExtra("recipe");
+        recipe = (Recipe) getIntent().getExtras().get("recipe");
 
         showName = (TextView) findViewById(R.id.show_recipe_name);
         showName.setText(recipe.getName());
@@ -32,6 +32,6 @@ public class ShowRecipe extends AppCompatActivity {
 
         showCalories = (TextView) findViewById(R.id.show_recipe_calories);
         showCalories.setText(recipe.getCalories() + " calories");
-*/
+
     }
 }

@@ -1,6 +1,7 @@
 package com.dangerducks.cookit.utils;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     public static class RecipeHolder extends RecyclerView.ViewHolder {
         CardView holder;
         TextView title, portions;
+        Recipe recipe;
 
         public RecipeHolder(View view)  {
             super(view);
@@ -37,9 +39,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ShowRecipe.class);
+                    intent.putExtra("recipe", recipe);
                     v.getContext().startActivity(intent);
                 }
             });
+        }
+
+        public void setRecipe(Recipe recipe) {
+            this.recipe = recipe;
         }
     }
 
@@ -67,6 +74,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     @Override
     public void onBindViewHolder(RecipeHolder holder, int position) {
+        holder.setRecipe(recipes.elementAt(position));
         holder.title.setText(recipes.get(position).getName());
         holder.portions.setText(recipes.get(position).getPortions() + " portions");
     }
