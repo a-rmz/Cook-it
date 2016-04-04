@@ -11,6 +11,8 @@ import java.util.Vector;
  */
 public class Step implements Serializable {
 
+    private static final long serialVersionUID =-70073060467604464L;
+
     String description;
     int time;
     transient Image image;
@@ -49,4 +51,9 @@ public class Step implements Serializable {
     public void removeIngredient(int index) {
         ingredients.remove(index);
     }
+
+    public Vector<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
 }
