@@ -161,7 +161,7 @@ public class FileManager {
 ////////////////////////////////////////////////////////////////
 
     public static Category loadCategory(String name, String dir){
-        dir = dir + "/rec/";
+        dir = dir + "/cat/";
 
         Category aux = new Category();
         try {
@@ -180,7 +180,7 @@ public class FileManager {
 
 
     public static boolean saveCategory(Category category, String dir){
-        dir += "/rec/";
+        dir += "/cat/";
         File path = new File(dir);
         if(!path.exists()) path.mkdir();
 

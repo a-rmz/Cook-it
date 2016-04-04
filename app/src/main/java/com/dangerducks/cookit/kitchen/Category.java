@@ -8,6 +8,8 @@ import java.util.Vector;
  */
 public class Category implements Serializable {
 
+    private static final long serialVersionUID =9080533760279203420L;
+
     public static int CID;
 
     String name;
