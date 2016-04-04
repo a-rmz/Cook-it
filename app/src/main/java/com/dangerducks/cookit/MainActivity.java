@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity{
         User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
         displayableRecipes = User.user().recipesSaved;
 
-
         adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
     }
