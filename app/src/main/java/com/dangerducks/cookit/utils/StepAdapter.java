@@ -1,6 +1,7 @@
 package com.dangerducks.cookit.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     @Override
     public void onBindViewHolder(StepHolder holder, int position) {
+        Log.v("Adapter", "Step " + position + " descrip: " + steps.elementAt(position).getDescription());
         holder.stepDescription.setText(steps.elementAt(position).getDescription());
         holder.stepDuration.setText(steps.elementAt(position).getTime() + " minutes");
         holder.stepNumber.setText("Step " + (position+1));
