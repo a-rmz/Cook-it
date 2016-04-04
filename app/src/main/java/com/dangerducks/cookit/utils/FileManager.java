@@ -158,6 +158,80 @@ public class FileManager {
 
     }
 
+////////////////////////////////////////////////////////////////
+
+    public static Category loadCategory(String name, String dir){
+        dir = dir + "/rec/";
+
+        Category aux = new Category();
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(dir + name ));
+            aux = (Category)in.readObject();
+            in.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println("Receta inexistente");
+        }
+
+        return aux;
+    }
 
 
+    public static boolean saveCategory(Category category, String dir){
+        dir += "/rec/";
+        File path = new File(dir);
+        if(!path.exists()) path.mkdir();
+
+        String fileName = category.getName() + ".obj";
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dir + fileName));
+            out.writeObject(category);
+            out.close();
+            return true;
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            //e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public static Vector<Category> getCategories(String dir){
+        Vector<Category> categories = new Vector<Category>();
+        String[] objects = openFolder(dir);
+        Category aux;
+
+        for(String name: objects){
+            aux = FileManager.loadCategory(name, dir);
+            categories.add(aux);
+        }
+
+        return categories;
+
+    }
+
+    public static void createBasicCategories(String dir){
+        String[] names = {"Mexican", "Oriental", "Italian", "French", "Soup", "Seafood", "Desserts","Beverages"};
+        String[] descriptions ={
+                "Salsa, Tacos, Guacamole",
+                "Rice, Rats, Dog",
+                "Pizza, Spaghetti, Mamma mia",
+                "Baguette, Lots of cheese and wine",
+                "A lot of soups ",
+                "Fish, Shrimps, Whale",
+                "Sweet desserts for you",
+                "Alcohol and no-alcohol"
+        };
+
+        for(int i = 0 ; i < 8; i++){
+            Category aux = new Category(names[i]);
+            aux.setDescription(descriptions[i]);
+
+            FileManager.saveCategory(aux,dir);
+        }
+    }
 }
