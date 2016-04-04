@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity{
     private CoordinatorLayout coordinatorLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String mActivityTitle;
     Toolbar toolbar;
     private FloatingActionButton fab;
     RecyclerView recyclerView;
@@ -91,13 +90,11 @@ public class MainActivity extends AppCompatActivity{
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
             public void onDrawerOpened(View view) {
                 super.onDrawerOpened(view);
-                getSupportActionBar().setTitle(R.string.open_drawer);
                 invalidateOptionsMenu();
             }
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu();
             }
         };
