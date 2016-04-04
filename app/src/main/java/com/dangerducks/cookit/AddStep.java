@@ -38,6 +38,7 @@ public class AddStep extends AppCompatDialog {
         this.activity = activity;
         this.stepName = stepName;
         step = new Step();
+        step.setDescription(stepName);
         this.recipe = recipe;
     }
 
@@ -54,7 +55,7 @@ public class AddStep extends AppCompatDialog {
             @Override
             public void onClick(View v) {
                 String duration = ((EditText) findViewById(R.id.add_duration)).getText().toString();
-                if(!duration.isEmpty() && ingredientsAdded > 0) {
+                if(!duration.isEmpty()) {
                     step.setTime(Integer.parseInt(duration));
                     recipe.addStep(step);
                     dismiss();
