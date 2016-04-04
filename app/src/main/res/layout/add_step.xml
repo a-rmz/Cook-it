@@ -25,6 +25,8 @@
         android:id="@+id/add_duration"
         android:layout_below="@id/step_duration"
         android:inputType="time"
+        android:gravity="center"
+        android:hint="@string/in_minutes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

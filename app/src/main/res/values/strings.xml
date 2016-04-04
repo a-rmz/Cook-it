@@ -48,6 +48,7 @@
     <string name="remove_ingredient">Remove</string>
     <string name="finish_add_ingredient">Done</string>
     <string name="step_duration_caption">Step duration:</string>
+    <string name="in_minutes">in minutes</string>
 
     <string name="recipe_saved">The recipe was saved successfully</string>
 
