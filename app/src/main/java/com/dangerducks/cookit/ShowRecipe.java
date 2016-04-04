@@ -1,11 +1,16 @@
 package com.dangerducks.cookit;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.NestedScrollingChild;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +27,9 @@ public class ShowRecipe extends AppCompatActivity {
     Recipe recipe;
     TextView showDuration, showPortions, showCalories;
     RecyclerView recyclerView;
+    AppBarLayout appBar;
     CollapsingToolbarLayout collapsingToolbar;
+    NestedScrollView nested;
     Toolbar toolbar;
 
     @Override
@@ -32,8 +39,22 @@ public class ShowRecipe extends AppCompatActivity {
 
         recipe = (Recipe) getIntent().getExtras().get("recipe");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_step_container);
+
+        recyclerView.setNestedScrollingEnabled(false);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.recipe_collapsing_toolbar);
         collapsingToolbar.setTitle(recipe.getName());
+
+        appBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if((-verticalOffset) + toolbar.getHeight() >= appBarLayout.getHeight()){
+                    // Collapsed
+                    recyclerView.setNestedScrollingEnabled(true);
+                    Snackbar.make(findViewById(R.id.show_recipe_coordinator), "Collapsed", Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         toolbar = (Toolbar) findViewById(R.id.recipe_toolbar);
         setupToolbar();
