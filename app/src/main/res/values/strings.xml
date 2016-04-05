@@ -53,6 +53,9 @@
 
     <string name="recipe_saved">The recipe was saved successfully</string>
 
+    <!-- Show recipe -->
+    <string name="recipe_info">Information</string>
+
     <!-- Show step -->
     <string name="empty_step_description">This is an empty step description template</string>
     <string name="step_number">Step </string>

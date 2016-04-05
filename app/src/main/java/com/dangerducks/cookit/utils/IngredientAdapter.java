@@ -12,7 +12,7 @@ import com.dangerducks.cookit.kitchen.Ingredient;
 
 import java.util.Vector;
 
-/**
+/*
  * Created by alex on 4/4/16.
  */
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientHolder> {

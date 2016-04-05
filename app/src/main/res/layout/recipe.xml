@@ -19,7 +19,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/recipe_collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="256dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
@@ -67,7 +67,23 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/recipe_info_caption"
+                        android:text="@string/recipe_info"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_below="@id/recipe_info_caption"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+                    <TextView
                         android:id="@+id/show_duration"
+                        android:layout_below="@id/divider"
+                        android:layout_centerHorizontal="true"
                         android:text="@string/duration_caption"
                         android:textSize="18sp"
                         android:layout_marginTop="15dp"
@@ -86,7 +102,7 @@
                             android:id="@+id/show_recipe_portions"
                             android:text="@string/portions_caption"
                             android:textSize="18sp"
-                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"/>
@@ -95,7 +111,7 @@
                             android:id="@+id/show_recipe_calories"
                             android:text="@string/calories_caption"
                             android:textSize="18sp"
-                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"/>
