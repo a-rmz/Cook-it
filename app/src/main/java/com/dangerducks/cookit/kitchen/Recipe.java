@@ -76,6 +76,7 @@ public class Recipe implements Serializable {
     }
 
     public void setDuration() {
+        this.duration = 0;
         for(Step step: preparation.steps) {
             this.duration += step.getTime();
         }
