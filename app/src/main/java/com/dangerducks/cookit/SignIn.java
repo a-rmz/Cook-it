@@ -2,11 +2,14 @@ package com.dangerducks.cookit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.dangerducks.cookit.DB.DBFunct;
 import com.dangerducks.cookit.utils.FileManager;
 
 /**
@@ -16,11 +19,19 @@ public class SignIn extends AppCompatActivity {
 
     Button btn;
     EditText usr, pass, mail;
+    DBFunct db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin_layout);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        db = new DBFunct();
 
         btn = (Button) findViewById(R.id.signin);
 
@@ -37,9 +48,11 @@ public class SignIn extends AppCompatActivity {
 
                 if(validate(username, password, email)) {
                     FileManager.saveUserData(SignIn.this, username, password, email);
-                    Intent intent = new Intent(SignIn.this, Login.class);
+                    Intent intent = new Intent(SignIn.this, MainActivity.class);
                     startActivity(intent);
                     finish();
+                } else {
+                    Snackbar.make(findViewById(R.id.signin_layout), getResources().getString(R.string.something_wrong), Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -53,13 +66,14 @@ public class SignIn extends AppCompatActivity {
           ) {
             User.user().setUsername(username);
             User.user().setEmail(email);
-            return true;
+            return db.RegisterUser(username, password, email, "");
         }
         return false;
     }
 
     private boolean validateUsername(String user) {
-        return true;
+        if(user.length() > 0 && user.length() <= 30) return true;
+        else return false;
     }
 
     private boolean validatePassword(String pass) {
@@ -68,7 +82,8 @@ public class SignIn extends AppCompatActivity {
     }
 
     private boolean validateEmail(String email) {
-        return true;
+        if(email.contains("@")) return true;
+        else return false;
     }
 
 }

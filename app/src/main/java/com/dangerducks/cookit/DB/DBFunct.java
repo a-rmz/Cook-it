@@ -1,16 +1,22 @@
 package com.dangerducks.cookit.DB;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 
 public class DBFunct {
     private DBC con = new DBC();
 
-    public boolean Login(String name, String pass) throws SQLException {
+    public boolean Login(String name, String pass) {
         String query = "SELECT Id,username,password FROM Users WHERE username='" + name + "'";
         ResultSet rs = con.SearchQuery(query);
-        if (rs.getString("username").equals(name) && rs.getString("password").equals(pass)) {
+        boolean u = false, p = false;
+
+        try {
+            u = rs.getString("username").equals(name);
+            p = rs.getString("password").equals(pass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (u && p) {
             return true;
         }
         return false;
