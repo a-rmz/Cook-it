@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dangerducks.cookit.R;
@@ -43,6 +45,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     protected void setIngredientAdapter(RecyclerView recyclerView, Step step) {
         ingredientAdapter = new IngredientAdapter(step.getIngredients());
         LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(ingredientAdapter);
     }
