@@ -2,6 +2,7 @@ package com.dangerducks.cookit;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -69,10 +70,11 @@ public class MainActivity extends AppCompatActivity{
 
         setupToolbar();
 
+
         setUpDrawer();
+
         User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
         displayableRecipes = User.user().recipesSaved;
-
         adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
     }
@@ -223,5 +225,6 @@ public class MainActivity extends AppCompatActivity{
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
     }
+
 }
 
