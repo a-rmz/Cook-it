@@ -69,7 +69,8 @@ public class Login extends AppCompatActivity {
     }
 
     protected boolean loginValidation(String user, String pass) {
-        return db.Login(user, pass);
+        return true;
+        //return db.Login(user, pass);
         /*
         String[] userInfo = FileManager.loadUserData(Login.this);
 
