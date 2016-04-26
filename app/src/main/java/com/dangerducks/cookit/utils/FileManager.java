@@ -166,7 +166,6 @@ public class FileManager {
 
         for(String name: objects){
             aux = FileManager.loadRecipe(name, dir);
-            System.out.println("rcpld: " + name + " " + dir);
             recipes.add(aux);
         }
 

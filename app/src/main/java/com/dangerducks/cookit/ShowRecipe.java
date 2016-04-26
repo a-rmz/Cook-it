@@ -114,8 +114,6 @@ public class ShowRecipe extends AppCompatActivity {
     }
 
     protected void removeRecipe() {
-//        int pos = User.user().recipesSaved.indexOf(recipe);
-//        for(int i = 0; i < User.user().recipesSaved.size(); i++) {System.out.println("rcp: " + User.user().recipesSaved.elementAt(i).name);}
         User.user().recipesSaved.removeElement(recipe);
         FileManager.deleteRecipe(recipe, getFilesDir().toString());
         setResult(-1);
