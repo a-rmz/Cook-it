@@ -1,6 +1,7 @@
 package com.dangerducks.cookit;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.dangerducks.cookit.DB.DBFunct;
+import com.dangerducks.cookit.utils.FileManager;
 
 public class Login extends AppCompatActivity {
 
@@ -52,6 +54,8 @@ public class Login extends AppCompatActivity {
                 String pas = pass.getText().toString();
 
                 if (loginValidation(usr, pas)) {
+                    RecipeLoader RL = new RecipeLoader();
+                    RL.execute();
                     startMainApplication();
                 } else {
                     Snackbar.make(v, getResources().getText(R.string.wrong_data).toString(), Snackbar.LENGTH_SHORT).show();
@@ -96,6 +100,18 @@ public class Login extends AppCompatActivity {
         clear.requestFocus();
         clear = (EditText) findViewById(R.id.pass);
         clear.setText("");
+
+    }
+
+
+
+    private class RecipeLoader extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
+            return null;
+        }
 
     }
 

@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dangerducks.cookit.kitchen.Recipe;
-import com.dangerducks.cookit.utils.FileManager;
 import com.dangerducks.cookit.utils.RecipeAdapter;
 
 import java.util.Vector;
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity{
         setupToolbar();
 
 
-        User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
         displayableRecipes = User.user().recipesSaved;
         adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
