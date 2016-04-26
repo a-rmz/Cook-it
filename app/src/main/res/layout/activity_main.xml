@@ -40,19 +40,39 @@
 
         </FrameLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:background="@color/colorPrimary"
-            app:backgroundTint="@color/colorPrimary"
             android:src="@drawable/ic_add_white_18dp"
             style="@style/AppTheme"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="@string/fab_recipe"
+                app:fabSize="mini"
+                app:fab_colorNormal="@color/colorPrimary"
+                app:fab_colorPressed="@color/colorPrimaryDark"
+                app:fab_colorRipple="@color/colorAccent"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_ingredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="@string/fab_ingredient"
+                app:fabSize="mini"
+                app:fab_colorNormal="@color/colorPrimary"
+                app:fab_colorPressed="@color/colorPrimaryDark"
+                app:fab_colorRipple="@color/colorAccent"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
 
     </android.support.design.widget.CoordinatorLayout>
 

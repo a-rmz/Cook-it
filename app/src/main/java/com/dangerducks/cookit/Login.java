@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.dangerducks.cookit.DB.DBFunct;
-import com.dangerducks.cookit.utils.FileManager;
 
 public class Login extends AppCompatActivity {
 

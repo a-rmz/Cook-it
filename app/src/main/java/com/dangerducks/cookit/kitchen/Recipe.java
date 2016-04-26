@@ -1,6 +1,6 @@
 package com.dangerducks.cookit.kitchen;
 
-import java.io.*;
+import java.io.Serializable;
 /**
  * Created by alex on 3/18/16.
  *
@@ -42,6 +42,7 @@ public class Recipe implements Serializable {
     public void setRID() {
         RID = RID++;
     }
+    public int getID() { return this.RID; }
 
     public void setPortions(int portions) {
         this.portions = portions;
@@ -110,4 +111,10 @@ public class Recipe implements Serializable {
         this.preparation.removeStep(index);
     }
 
+    @Override
+    public boolean equals(Object r) {
+        Recipe rec = (Recipe) r;
+        return
+            rec.name.equals(this.getName());
+    }
 }

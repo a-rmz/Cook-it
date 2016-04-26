@@ -1,14 +1,19 @@
 package com.dangerducks.cookit.utils;
-import com.dangerducks.cookit.kitchen.*;
 
 import android.content.Context;
 import android.util.Log;
-import java.util.Vector;
+
+import com.dangerducks.cookit.kitchen.Category;
+import com.dangerducks.cookit.kitchen.Recipe;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.*;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Vector;
 
 /**
  * Created by alex on 3/26/16.
@@ -123,12 +128,22 @@ public class FileManager {
         }
     }
 
+    public static void  deleteRecipe(Recipe recipe, String dir) {
+        dir += "/rec/" + recipe.getName()  + recipe.getID() + ".obj";
+        File rcp = new File(dir);
+        try {
+            rcp.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean saveRecipe(Recipe recipe, String dir){
         dir += "/rec/";
         File path = new File(dir);
         if(!path.exists()) path.mkdir();
 
-        String fileName = recipe.getName() + ".obj";
+        String fileName = recipe.getName() + recipe.getID() + ".obj";
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dir + fileName));
             out.writeObject(recipe);
@@ -151,6 +166,7 @@ public class FileManager {
 
         for(String name: objects){
             aux = FileManager.loadRecipe(name, dir);
+            System.out.println("rcpld: " + name + " " + dir);
             recipes.add(aux);
         }
 

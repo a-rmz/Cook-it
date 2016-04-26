@@ -1,8 +1,7 @@
 package com.dangerducks.cookit.utils;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,7 +39,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ShowRecipe.class);
                     intent.putExtra("recipe", recipe);
-                    v.getContext().startActivity(intent);
+                    ((Activity) v.getContext()).startActivityForResult(intent, 1, null);
                 }
             });
         }
@@ -63,6 +62,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     public void clear() {
         recipes.clear();
+        notifyDataSetChanged();
+    }
+
+    public void update(Vector<Recipe> recipes) {
+        this.recipes.clear();
+        this.recipes.addAll(recipes);
         notifyDataSetChanged();
     }
 

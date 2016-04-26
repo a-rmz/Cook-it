@@ -10,6 +10,7 @@
     <string name="action_clear">Clear</string>
     <string name="action_delete">Delete</string>
     <string name="action_save">Save</string>
+    <string name="action_remove">Remove recipe</string>
 
     <string name="hint_usr">Username</string>
     <string name="hint_pass">Password</string>
@@ -61,4 +62,8 @@
     <string name="empty_step_description">This is an empty step description template</string>
     <string name="step_number">Step </string>
     <string name="ingredients">Ingredients</string>
+
+    <!-- FAB labels -->
+    <string name="fab_recipe">Recipe</string>
+    <string name="fab_ingredient">Ingredient</string>
 </resources>

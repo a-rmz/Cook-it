@@ -1,38 +1,26 @@
 package com.dangerducks.cookit;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.SwipeDismissBehavior;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.FileManager;
 import com.dangerducks.cookit.utils.RecipeAdapter;
 
-import java.io.File;
 import java.util.Vector;
 
 
@@ -41,11 +29,14 @@ import java.util.Vector;
  */
 public class MainActivity extends AppCompatActivity{
 
+    private static final int RECIPE_ACTIVITY = 1;
+    private static final int RECIPE_REMOVED = -1;
+
+
     private CoordinatorLayout coordinatorLayout;
-    private NavigationView navigationView;
-    private ActionBarDrawerToggle mDrawerToggle;
     Toolbar toolbar;
-    private FloatingActionButton fab;
+    private com.github.clans.fab.FloatingActionMenu fab;
+    private com.github.clans.fab.FloatingActionButton fab_recipe, fab_ingredient;
     RecyclerView recyclerView;
     Vector<Recipe> displayableRecipes;
     RecipeAdapter adapter;
@@ -59,19 +50,21 @@ public class MainActivity extends AppCompatActivity{
         coordinatorLayout = (CoordinatorLayout)findViewById(R.id.main_coordinator_layout);
         recyclerView = (RecyclerView) coordinatorLayout.findViewById(R.id.card_recipe_container);
         toolbar = (Toolbar) coordinatorLayout.findViewById(R.id.toolbar);
-        fab = (FloatingActionButton) coordinatorLayout.findViewById(R.id.fab);
+        fab = (com.github.clans.fab.FloatingActionMenu) coordinatorLayout.findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab_ingredient = (com.github.clans.fab.FloatingActionButton) coordinatorLayout.findViewById(R.id.fab_ingredient);
+        fab_recipe = (com.github.clans.fab.FloatingActionButton) coordinatorLayout.findViewById(R.id.fab_recipe);
+
+        fab_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addRecipe();
+                fab.close(false);
             }
         });
 
         setupToolbar();
 
-
-        setUpDrawer();
 
         User.user().recipesSaved = FileManager.getRecipes(getFilesDir().getPath());
         displayableRecipes = User.user().recipesSaved;
@@ -85,58 +78,6 @@ public class MainActivity extends AppCompatActivity{
         setupRecyclerView();
     }
 
-    private void setUpDrawer() {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
-        navigationView = (NavigationView) drawerLayout.findViewById(R.id.main_drawer);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
-            public void onDrawerOpened(View view) {
-                super.onDrawerOpened(view);
-                invalidateOptionsMenu();
-            }
-
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                invalidateOptionsMenu();
-            }
-        };
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_close_session:
-                        FileManager.deleteUserData(MainActivity.this);
-                        Intent intent = new Intent(MainActivity.this, Login.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case R.id.nav_profile:
-                        User.user().recipesSaved.clear();
-                        adapter.clear();
-                        FileManager.clearRecipes(getFilesDir().getPath());
-                        Snackbar.make(findViewById(R.id.main_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
-                }
-
-                return false;
-            }
-        });
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.main_drawer);
-        View header = navigationView.getHeaderView(0);
-
-        TextView tv = (TextView) header.findViewById(R.id.user_drawer);
-        tv.setText(User.user().getUsername());
-
-        tv = (TextView) header.findViewById(R.id.email_drawer);
-        tv.setText(User.user().getEmail());
-
-
-    }
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
@@ -152,9 +93,6 @@ public class MainActivity extends AppCompatActivity{
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
 
-        if (mDrawerToggle.onOptionsItemSelected(menuItem)) {
-            return true;
-        }
         switch (menuItem.getItemId()) {
             case R.id.action_search:
                 nothingToDoHere();
@@ -178,18 +116,6 @@ public class MainActivity extends AppCompatActivity{
         inflater.inflate(R.menu.main_activity_actions, menu);
 
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     public void nothingToDoHere() {
@@ -226,5 +152,15 @@ public class MainActivity extends AppCompatActivity{
         helper.attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case RECIPE_ACTIVITY:
+                if(resultCode == RECIPE_REMOVED) //setupRecyclerView();
+                    displayableRecipes = User.user().recipesSaved;
+                    adapter = new RecipeAdapter(displayableRecipes);
+                break;
+        }
+    }
 }
 
