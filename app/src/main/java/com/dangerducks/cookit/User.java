@@ -26,7 +26,9 @@ public class User {
 
     private static User instance = new User();
 
-    private User() { }
+    private User() {
+        recipesSaved = new Vector<>();
+    }
 
     public static User user() {
         return instance;

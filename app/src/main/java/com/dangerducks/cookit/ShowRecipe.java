@@ -1,5 +1,6 @@
 package com.dangerducks.cookit;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -115,6 +116,7 @@ public class ShowRecipe extends AppCompatActivity {
 
     protected void removeRecipe() {
         User.user().recipesSaved.removeElement(recipe);
+        System.out.println("rmvusz: " + User.user().recipesSaved.size());
         FileManager.deleteRecipe(recipe, getFilesDir().toString());
         setResult(-1);
         finish();

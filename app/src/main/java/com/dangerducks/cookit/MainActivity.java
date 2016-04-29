@@ -1,11 +1,15 @@
 package com.dangerducks.cookit;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+
+import com.dangerducks.cookit.utils.FileManager;
 import com.github.clans.fab.FloatingActionMenu;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.RecipeAdapter;
@@ -36,7 +41,10 @@ public class MainActivity extends AppCompatActivity{
     Toolbar toolbar;
     private com.github.clans.fab.FloatingActionMenu fab;
     private com.github.clans.fab.FloatingActionButton fab_recipe, fab_ingredient;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private String mActivityTitle;
     RecyclerView recyclerView;
+    NavigationView navigationView;
     Vector<Recipe> displayableRecipes;
     RecipeAdapter adapter;
 
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
         setupToolbar();
+        setUpDrawer();
 
 
         displayableRecipes = User.user().recipesSaved;
@@ -89,7 +98,79 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    private void setUpDrawer() {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        navigationView = (NavigationView) drawerLayout.findViewById(R.id.main_drawer);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
+            public void onDrawerOpened(View view) {
+                super.onDrawerOpened(view);
+                getSupportActionBar().setTitle(R.string.open_drawer);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_close_session:
+                        FileManager.deleteUserData(MainActivity.this);
+                        Intent intent = new Intent(MainActivity.this, Login.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.nav_profile:
+                        User.user().recipesSaved.clear();
+                        adapter.clear();
+                        FileManager.clearRecipes(getFilesDir().getPath());
+                        Snackbar.make(findViewById(R.id.main_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
+                }
+
+                return false;
+            }
+        });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.main_drawer);
+        View header = navigationView.getHeaderView(0);
+
+        TextView tv = (TextView) header.findViewById(R.id.user_drawer);
+        tv.setText(User.user().getUsername());
+
+        tv = (TextView) header.findViewById(R.id.email_drawer);
+        tv.setText(User.user().getEmail());
+
+
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
     public boolean onOptionsItemSelected(MenuItem menuItem) {
+
+        if (mDrawerToggle.onOptionsItemSelected(menuItem)) {
+            return true;
+        }
 
         switch (menuItem.getItemId()) {
             case R.id.action_search:
@@ -141,7 +222,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Snackbar.make(coordinatorLayout, "Done", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(recyclerView, "Done", Snackbar.LENGTH_LONG).show();
                 adapter.remove(viewHolder.getAdapterPosition());
             }
 
@@ -155,8 +236,10 @@ public class MainActivity extends AppCompatActivity{
         switch (requestCode) {
             case RECIPE_ACTIVITY:
                 if(resultCode == RECIPE_REMOVED) //setupRecyclerView();
+                    //User.user().recipesSaved = data.getExtras().get("recipes");
                     displayableRecipes = User.user().recipesSaved;
-                    adapter = new RecipeAdapter(displayableRecipes);
+                    System.out.println("drsz: " + displayableRecipes.size());
+                    adapter.update(displayableRecipes);
                 break;
         }
     }

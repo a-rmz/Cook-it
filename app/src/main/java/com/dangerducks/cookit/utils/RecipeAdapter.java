@@ -2,6 +2,7 @@ package com.dangerducks.cookit.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,9 +67,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     }
 
     public void update(Vector<Recipe> recipes) {
-        this.recipes.clear();
-        this.recipes.addAll(recipes);
-        notifyDataSetChanged();
+        System.out.println("updrz: " + this.recipes.size());
+        this.recipes.removeAllElements();
+        notifyItemRangeRemoved(0, recipes.size() + 1);
+        this.recipes = recipes;
+        notifyItemRangeInserted(0, recipes.size());
     }
 
     @Override
