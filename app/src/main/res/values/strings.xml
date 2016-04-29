@@ -55,6 +55,13 @@
 
     <string name="recipe_saved">The recipe was saved successfully</string>
 
+    <!-- Add ingredient -->
+    <string name="add_ingredient_title">Add new ingredient</string>
+    <string name="ingredient_name_caption">Ingredient name</string>
+    <string name="ingredient_calories_caption">Calories</string>
+    <string name="ingredient_availability_caption">Available</string>
+    <string name="add_ingredient_done">Done</string>
+
     <!-- Show recipe -->
     <string name="recipe_info">Information</string>
 

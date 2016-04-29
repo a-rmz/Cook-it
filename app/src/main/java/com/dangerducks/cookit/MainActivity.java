@@ -62,6 +62,16 @@ public class MainActivity extends AppCompatActivity{
         fab_ingredient = (com.github.clans.fab.FloatingActionButton) coordinatorLayout.findViewById(R.id.fab_ingredient);
         fab_recipe = (com.github.clans.fab.FloatingActionButton) coordinatorLayout.findViewById(R.id.fab_recipe);
 
+        fab_ingredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fab.close(false);
+                AddIngredientDialog addIngredientDialog = new AddIngredientDialog(v.getContext());
+                addIngredientDialog.setTitle(getResources().getString(R.string.add_ingredient_title));
+                addIngredientDialog.show();
+            }
+        });
+
         fab_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

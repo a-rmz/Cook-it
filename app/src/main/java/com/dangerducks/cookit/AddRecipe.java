@@ -186,6 +186,7 @@ public class AddRecipe extends AppCompatActivity {
     private void addIngredients(String step) {
         AddStep addStep = new AddStep(this, step, recipe);
         addStep.setTitle(step);
+        addStep.setCancelable(false);
         addStep.show();
     }
 

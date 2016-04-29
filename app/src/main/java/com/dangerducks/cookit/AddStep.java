@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,8 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dangerducks.cookit.kitchen.Ingredient;
 import com.dangerducks.cookit.kitchen.Recipe;
@@ -59,7 +62,9 @@ public class AddStep extends AppCompatDialog {
                     recipe.addStep(step);
                     dismiss();
                 } else {
-                    Snackbar.make(v, activity.getResources().getString(R.string.empty_time), Snackbar.LENGTH_LONG).show();
+                    Toast t = Toast.makeText(v.getContext(),  activity.getResources().getString(R.string.empty_time), Toast.LENGTH_SHORT);
+                    t.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 30);
+                    t.show();
                 }
             }
         });
@@ -102,7 +107,8 @@ public class AddStep extends AppCompatDialog {
                     TextView textOut = (TextView) view.findViewById(R.id.ingredient);
 
                     String ingredientName = ingredients.getSelectedItem().toString();
-                    Ingredient ingredient = new Ingredient(ingredientName);
+                    Ingredient ingredient = new Ingredient();
+                    ingredient.setName(ingredientName);
                     textOut.setText(ingredientName);
 
                     Button remove = (Button) view.findViewById(R.id.remove_ingredient_btn);
