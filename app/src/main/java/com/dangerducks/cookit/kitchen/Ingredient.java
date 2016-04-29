@@ -13,7 +13,20 @@ public class Ingredient implements Serializable{
     int calories;
     int disponibility;
 
-    public Ingredient(String name) {
+    public Ingredient(String name, int calories) {
+        this.name = name;
+        this.calories = calories;
+    }
+
+    public Ingredient() {
+
+    }
+
+    public static void setIID(int IID) {
+        Ingredient.IID = IID;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -21,8 +34,20 @@ public class Ingredient implements Serializable{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setDisponibility(int disponibility) {
+        this.disponibility = disponibility;
+    }
+
+    public int getDisponibility() {
+        return this.disponibility;
     }
 
 }
