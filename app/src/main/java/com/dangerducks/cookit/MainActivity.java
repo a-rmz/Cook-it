@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity{
         displayableRecipes = User.user().recipesSaved;
         adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
+        setupDB();
     }
 
     @Override
@@ -252,6 +253,10 @@ public class MainActivity extends AppCompatActivity{
                     adapter.update(displayableRecipes);
                 break;
         }
+    }
+
+    private void setupDB() {
+
     }
 }
 

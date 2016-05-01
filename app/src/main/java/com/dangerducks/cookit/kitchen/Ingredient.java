@@ -13,9 +13,10 @@ public class Ingredient implements Serializable{
     int calories;
     int disponibility;
 
-    public Ingredient(String name, int calories) {
+    public Ingredient(String name, int calories, int disponibility) {
         this.name = name;
         this.calories = calories;
+        this.disponibility = disponibility;
     }
 
     public Ingredient() {

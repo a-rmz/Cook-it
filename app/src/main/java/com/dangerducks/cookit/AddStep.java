@@ -2,22 +2,24 @@ package com.dangerducks.cookit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dangerducks.cookit.DB.local.LocalDBOperations;
 import com.dangerducks.cookit.kitchen.Ingredient;
 import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.kitchen.Step;
@@ -28,7 +30,7 @@ import com.dangerducks.cookit.kitchen.Step;
 public class AddStep extends AppCompatDialog {
 
     Activity activity;
-    Spinner ingredients;
+    Spinner ingredientsSpinner;
     String stepName;
     Step step;
     Recipe recipe;
@@ -69,26 +71,27 @@ public class AddStep extends AppCompatDialog {
             }
         });
 
-        ingredients = (Spinner) findViewById(R.id.ingredient_base);
+        ingredientsSpinner = (Spinner) findViewById(R.id.ingredient_base);
         setupSpinner();
 
         setupIngredientAdder();
+        System.out.println("finished oncreate");
     }
 
     private void setupSpinner() {
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(), R.array.ingredients, R.layout.spinner_element);
-        ingredients.setAdapter(adapter);
-        ingredients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        LocalDBOperations dbOperations = new LocalDBOperations(getContext());
+        final CursorAdapter adapter = new CursorAdapter(getContext(), dbOperations.getIngredientCursor(), false) {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            public View newView(Context context, Cursor cursor, ViewGroup parent) {
+                return LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void bindView(View view, Context context, Cursor cursor) {
 
             }
-        });
+        };
+        ingredientsSpinner.setAdapter(adapter);
     }
 
 
@@ -99,17 +102,18 @@ public class AddStep extends AppCompatDialog {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("click");
 
-                if(ingredients.getSelectedItemId() != 0) {
+                if(ingredientsSpinner.getSelectedItemId() != 0) {
                     LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     final View view = inflater.inflate(R.layout.add_step_ingredient, null);
 
                     TextView textOut = (TextView) view.findViewById(R.id.ingredient);
 
-                    String ingredientName = ingredients.getSelectedItem().toString();
-                    Ingredient ingredient = new Ingredient();
-                    ingredient.setName(ingredientName);
-                    textOut.setText(ingredientName);
+                    Ingredient ingredient = (Ingredient) ingredientsSpinner.getSelectedItem();
+                    System.out.println("ingn: " + ingredient.getName());
+
+                    textOut.setText(ingredient.getName());
 
                     Button remove = (Button) view.findViewById(R.id.remove_ingredient_btn);
                     remove.setOnClickListener(new View.OnClickListener() {

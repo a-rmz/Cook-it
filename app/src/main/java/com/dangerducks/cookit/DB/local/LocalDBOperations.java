@@ -35,26 +35,8 @@ public class LocalDBOperations {
 
     public List<Ingredient> getIngredients() {
         List<Ingredient> ingredientList = null;
-        SQLiteDatabase db = localDBHandler.getWritableDatabase();
 
-        String[] PROJECTION = {
-                IngredientContract.IngredientEntry._ID,
-                IngredientContract.IngredientEntry.KEY_NAME,
-                IngredientContract.IngredientEntry.KEY_CALORIES,
-                IngredientContract.IngredientEntry.KEY_DISPONIBILITY
-        };
-
-        String SORT_ORDER = IngredientContract.IngredientEntry.TABLE_INGREDIENTS + " ASC";
-
-        Cursor c = db.query(
-                IngredientContract.IngredientEntry.TABLE_INGREDIENTS,     // The table to query
-                PROJECTION,                                               // The columns to return
-                null,                                                     // The columns for the WHERE clause
-                null,                                                     // The values for the WHERE clause
-                null,                                                     // don't group the rows
-                null,                                                     // don't filter by row groups
-                SORT_ORDER
-        );
+        Cursor c = getIngredientCursor();
 
 
         if (c != null && c.moveToFirst()) {
@@ -72,6 +54,31 @@ public class LocalDBOperations {
         }
 
         return ingredientList;
+    }
+
+    public Cursor getIngredientCursor() {
+        SQLiteDatabase db = localDBHandler.getWritableDatabase();
+
+        String[] PROJECTION = {
+                IngredientContract.IngredientEntry._ID,
+                IngredientContract.IngredientEntry.KEY_NAME,
+                IngredientContract.IngredientEntry.KEY_CALORIES,
+                IngredientContract.IngredientEntry.KEY_DISPONIBILITY
+        };
+
+        String SORT_ORDER = IngredientContract.IngredientEntry.KEY_NAME + " ASC";
+
+        Cursor c = db.query(
+                IngredientContract.IngredientEntry.TABLE_INGREDIENTS,     // The table to query
+                PROJECTION,                                               // The columns to return
+                null,                                                     // The columns for the WHERE clause
+                null,                                                     // The values for the WHERE clause
+                null,                                                     // don't group the rows
+                null,                                                     // don't filter by row groups
+                SORT_ORDER
+        );
+
+        return c;
     }
 
 }
