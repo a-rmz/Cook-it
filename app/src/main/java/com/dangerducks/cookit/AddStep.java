@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dangerducks.cookit.DB.local.IngredientContract;
 import com.dangerducks.cookit.DB.local.LocalDBOperations;
 import com.dangerducks.cookit.kitchen.Ingredient;
 import com.dangerducks.cookit.kitchen.Recipe;
@@ -35,6 +36,7 @@ public class AddStep extends AppCompatDialog {
     Step step;
     Recipe recipe;
     Button done;
+    Button add;
     int ingredientsAdded = 0;
 
     public AddStep(Activity activity, String stepName, Recipe recipe) {
@@ -74,8 +76,8 @@ public class AddStep extends AppCompatDialog {
         ingredientsSpinner = (Spinner) findViewById(R.id.ingredient_base);
         setupSpinner();
 
+        add = (Button) findViewById(R.id.add_ingredient_btn);
         setupIngredientAdder();
-        System.out.println("finished oncreate");
     }
 
     private void setupSpinner() {
@@ -83,12 +85,17 @@ public class AddStep extends AppCompatDialog {
         final CursorAdapter adapter = new CursorAdapter(getContext(), dbOperations.getIngredientCursor(), false) {
             @Override
             public View newView(Context context, Cursor cursor, ViewGroup parent) {
-                return LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
+                return LayoutInflater.from(context).inflate(R.layout.ingredient, parent, false);
             }
 
             @Override
             public void bindView(View view, Context context, Cursor cursor) {
-
+                TextView text = (TextView) view.findViewById(R.id.ingredient_name);
+                String name = cursor.getString(cursor.getColumnIndex(IngredientContract.IngredientEntry.KEY_NAME));
+                int cals = cursor.getInt(cursor.getColumnIndex(IngredientContract.IngredientEntry.KEY_CALORIES));
+                text.setText(name);
+                text = (TextView) view.findViewById(R.id.ingredient_cals);
+                text.setText(cals + " calories");
             }
         };
         ingredientsSpinner.setAdapter(adapter);
@@ -96,7 +103,7 @@ public class AddStep extends AppCompatDialog {
 
 
     private void setupIngredientAdder() {
-        Button add = (Button) findViewById(R.id.add_ingredient_btn);
+
         final LinearLayout container = (LinearLayout) findViewById(R.id.ingredient_container);
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +117,7 @@ public class AddStep extends AppCompatDialog {
 
                     TextView textOut = (TextView) view.findViewById(R.id.ingredient);
 
-                    Ingredient ingredient = (Ingredient) ingredientsSpinner.getSelectedItem();
+                    Ingredient ingredient = Ingredient.createIngredientFromCursor((Cursor) ingredientsSpinner.getSelectedItem());
                     System.out.println("ingn: " + ingredient.getName());
 
                     textOut.setText(ingredient.getName());

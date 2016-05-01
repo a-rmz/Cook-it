@@ -20,10 +20,12 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
 
     public static class IngredientHolder extends RecyclerView.ViewHolder {
         TextView ingredient;
+        TextView calories;
 
         public IngredientHolder(View view) {
             super(view);
             ingredient = (TextView) view.findViewById(R.id.ingredient_name);
+            calories = (TextView) view.findViewById(R.id.ingredient_cals);
         }
 
     }
@@ -42,6 +44,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     @Override
     public void onBindViewHolder(IngredientHolder holder, int position) {
         holder.ingredient.setText(ingredients.elementAt(position).getName());
+//        holder.calories.setText(ingredients.elementAt(position).getCalories());
     }
 
     @Override

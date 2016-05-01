@@ -1,5 +1,7 @@
 package com.dangerducks.cookit.kitchen;
 
+import android.database.Cursor;
+
 import java.io.Serializable;
 
 /**
@@ -51,4 +53,12 @@ public class Ingredient implements Serializable{
         return this.disponibility;
     }
 
+    public static Ingredient createIngredientFromCursor(Cursor c) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setIID(c.getInt(0));
+        ingredient.setName(c.getString(1));
+        ingredient.setCalories(c.getInt(2));
+        ingredient.setDisponibility(c.getInt(3));
+        return ingredient;
+    }
 }

@@ -40,16 +40,9 @@ public class LocalDBOperations {
 
 
         if (c != null && c.moveToFirst()) {
-            Ingredient ingredient;
             ingredientList = new ArrayList<>();
             do {
-                ingredient = new Ingredient();
-                ingredient.setIID(c.getInt(0));
-                ingredient.setName(c.getString(1));
-                ingredient.setCalories(c.getInt(2));
-                ingredient.setDisponibility(c.getInt(3));
-
-                ingredientList.add(ingredient);
+                ingredientList.add(Ingredient.createIngredientFromCursor(c));
             } while (c.moveToNext());
         }
 
