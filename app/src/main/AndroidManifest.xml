@@ -35,6 +35,10 @@
                   android:label="">
         </activity>
 
+        <activity android:name=".ShowIngredients"
+                  android:label="">
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/ingredient_name"
-          android:layout_margin="5dp"
-          android:text="Text"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/ingredient_item"
+          android:layout_margin="20dp"
+          android:orientation="vertical"
           android:textSize="16sp"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
+          android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/ingredient_name"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:text="Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/ingredient_cals"
+        android:layout_marginTop="10dp"
+        android:text="Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

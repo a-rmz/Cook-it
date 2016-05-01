@@ -146,6 +146,10 @@ public class MainActivity extends AppCompatActivity{
                         adapter.clear();
                         FileManager.clearRecipes(getFilesDir().getPath());
                         Snackbar.make(findViewById(R.id.main_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_my_recipes:
+                        intent = new Intent(MainActivity.this, ShowIngredients.class);
+                        startActivity(intent);
                 }
 
                 return false;

@@ -46,6 +46,7 @@ public class AddIngredientDialog extends AppCompatDialog {
                 );
                 LocalDBOperations localDBOperations = new LocalDBOperations(v.getContext());
                 localDBOperations.addIngredient(ingredient);
+                System.out.println("ingnm: " + ingredient.getName());
                 dismiss();
             }
         });
