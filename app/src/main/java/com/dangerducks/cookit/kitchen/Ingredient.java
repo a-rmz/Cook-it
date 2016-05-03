@@ -7,7 +7,9 @@ import java.io.Serializable;
 /**
  * Created by alex on 3/18/16.
  */
-public class Ingredient implements Serializable{
+public class Ingredient implements Serializable {
+
+    private static final long serialVersionUID =-8402719210047104980L;
 
     public static int IID;
 

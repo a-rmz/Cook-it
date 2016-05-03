@@ -8,7 +8,7 @@ import java.util.Vector;
 public class Preparation implements Serializable {
 
     Vector<Step> steps;
-    Vector<Ingredient> ingredients;
+    //Vector<Ingredient> ingredients;
     int actualStep;
     int preparationTime;
 
@@ -17,16 +17,16 @@ public class Preparation implements Serializable {
         steps = new Vector<>();
     }
 
-    Step showStep() {
+    public Step showStep() {
         return steps.elementAt(actualStep);
     }
 
-    Step nextStep() {
+    public Step nextStep() {
         if(++actualStep < steps.size()) return steps.elementAt(actualStep);
         return null;
     }
 
-    Step previousStep() {
+    public Step previousStep() {
         if(--actualStep >= 0) return steps.elementAt(actualStep);
         return null;
     }
@@ -35,29 +35,37 @@ public class Preparation implements Serializable {
 
     }
 
-    void addStep(Step step) {
+    public void addStep(Step step) {
         steps.add(step);
     }
 
-    void removeStep(int index) {
+    public void removeStep(int index) {
         steps.remove(index);
     }
 
-    void addIngredient(Ingredient ingredient){
-        ingredients.add(ingredient);
-    }
-
-    int getCalories(){
-        int totalCalories = 0;
-
-        for (Ingredient i : ingredients) {
-            totalCalories += i.calories;
-        }
-        
-        return totalCalories;
-    }
+//    public void addIngredient(Ingredient ingredient){
+//        ingredients.add(ingredient);
+//    }
+//
+//    public int getCalories(){
+//        int totalCalories = 0;
+//
+//        for (Ingredient i : ingredients) {
+//            totalCalories += i.calories;
+//        }
+//
+//        return totalCalories;
+//    }
 
     public Vector<Step> getSteps() {
         return this.steps;
+    }
+
+    public int getPreparationTime() {
+        int time = 0;
+        for (Step s : steps) {
+            time += s.getTime();
+        }
+        return time;
     }
 }

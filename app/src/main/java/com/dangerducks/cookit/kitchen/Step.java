@@ -1,6 +1,7 @@
 package com.dangerducks.cookit.kitchen;
 
 
+import android.content.Intent;
 import android.media.Image;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Step implements Serializable {
     transient Image image;
     Unit unit;
     Vector<Ingredient> ingredients;
+//    private Vector<Integer> ingredientIDs;
 
     public Step() {
         ingredients = new Vector<>();
@@ -46,6 +48,7 @@ public class Step implements Serializable {
 
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
+//        ingredientIDs.add(ingredient.IID);
     }
 
     public void removeIngredient(int index) {
@@ -55,5 +58,7 @@ public class Step implements Serializable {
     public Vector<Ingredient> getIngredients() {
         return this.ingredients;
     }
+
+//    public Vector<Integer> getIngredientIDs() {return this.ingredientIDs;}
 
 }

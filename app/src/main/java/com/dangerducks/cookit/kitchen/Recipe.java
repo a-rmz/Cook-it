@@ -32,7 +32,7 @@ public class Recipe implements Serializable {
 
         this.preparation = preparation;
         this.name = name;
-        calories = preparation.getCalories();
+//        calories = preparation.getCalories();
         portions = 4;
         rating = 0;
         dificulty = 0;

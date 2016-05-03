@@ -63,7 +63,7 @@ public class AddStep extends AppCompatDialog {
                 String duration = ((EditText) findViewById(R.id.add_duration)).getText().toString();
                 if(!duration.isEmpty()) {
                     step.setTime(Integer.parseInt(duration));
-                    recipe.addStep(step);
+                    recipe.preparation.addStep(step);
                     dismiss();
                 } else {
                     Toast t = Toast.makeText(v.getContext(),  activity.getResources().getString(R.string.empty_time), Toast.LENGTH_SHORT);
@@ -109,7 +109,6 @@ public class AddStep extends AppCompatDialog {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("click");
 
                 if(ingredientsSpinner.getSelectedItemId() != 0) {
                     LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -118,7 +117,6 @@ public class AddStep extends AppCompatDialog {
                     TextView textOut = (TextView) view.findViewById(R.id.ingredient);
 
                     Ingredient ingredient = Ingredient.createIngredientFromCursor((Cursor) ingredientsSpinner.getSelectedItem());
-                    System.out.println("ingn: " + ingredient.getName());
 
                     textOut.setText(ingredient.getName());
 

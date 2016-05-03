@@ -49,6 +49,34 @@ public class LocalDBOperations {
         return ingredientList;
     }
 
+    public Cursor getSelectedIngredient(int ID) {
+        SQLiteDatabase db = localDBHandler.getWritableDatabase();
+
+        String[] PROJECTION = {
+                IngredientContract.IngredientEntry._ID,
+                IngredientContract.IngredientEntry.KEY_NAME,
+                IngredientContract.IngredientEntry.KEY_CALORIES,
+                IngredientContract.IngredientEntry.KEY_DISPONIBILITY
+        };
+
+        String WHERE = IngredientContract.IngredientEntry._ID + "=?";
+        String ARGS[] = {ID + ""};
+
+        String SORT_ORDER = IngredientContract.IngredientEntry.KEY_NAME + " ASC";
+
+        Cursor c = db.query(
+                IngredientContract.IngredientEntry.TABLE_INGREDIENTS,     // The table to query
+                PROJECTION,                                               // The columns to return
+                WHERE,                                                    // The columns for the WHERE clause
+                ARGS,                                                     // The values for the WHERE clause
+                null,                                                     // don't group the rows
+                null,                                                     // don't filter by row groups
+                SORT_ORDER
+        );
+
+        return c;
+    }
+
     public Cursor getIngredientCursor() {
         SQLiteDatabase db = localDBHandler.getWritableDatabase();
 

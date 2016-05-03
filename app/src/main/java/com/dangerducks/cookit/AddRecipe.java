@@ -175,8 +175,7 @@ public class AddRecipe extends AppCompatActivity {
                 text.setText("");
 
                 textOut = (TextView) findViewById(R.id.duration);
-                recipe.setDuration();
-                textOut.setText(recipe.getDuration()+"");
+                textOut.setText(recipe.preparation.getPreparationTime() + "");
             }
         });
 
