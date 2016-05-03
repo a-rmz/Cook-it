@@ -17,7 +17,7 @@ import com.dangerducks.cookit.kitchen.Ingredient;
 public class AddIngredientDialog extends AppCompatDialog {
 
     Context context;
-    Button done;
+    Button done, cancel;
     EditText name, calories, available;
 
     public AddIngredientDialog(Context context) {
@@ -39,16 +39,34 @@ public class AddIngredientDialog extends AppCompatDialog {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Ingredient ingredient = new Ingredient(
-                        name.getText().toString(),
-                        Integer.parseInt(calories.getText().toString()),
-                        Integer.parseInt(available.getText().toString())
-                );
-                LocalDBOperations localDBOperations = new LocalDBOperations(v.getContext());
-                localDBOperations.addIngredient(ingredient);
-                System.out.println("ingnm: " + ingredient.getName());
+                if(validate()) {
+                    Ingredient ingredient = new Ingredient(
+                            name.getText().toString(),
+                            Integer.parseInt(calories.getText().toString()),
+                            Integer.parseInt(available.getText().toString())
+                    );
+                    LocalDBOperations localDBOperations = new LocalDBOperations(v.getContext());
+                    localDBOperations.addIngredient(ingredient);
+                    dismiss();
+                }
+            }
+        });
+
+        cancel = (Button) findViewById(R.id.add_ingredient_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dismiss();
             }
         });
     }
+
+    private boolean validate() {
+        if( name.getText().toString().length() > 0 &&
+            Integer.parseInt(calories.getText().toString()) > 0 &&
+            Integer.parseInt(available.getText().toString()) > 0 )
+            return true;
+        return false;
+    }
+
 }

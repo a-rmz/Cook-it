@@ -87,6 +87,7 @@ public class ShowRecipe extends AppCompatActivity {
 
         switch (menuItem.getItemId()) {
             case android.R.id.home:
+                setResult(0);
                 finish();
                 return true;
             case R.id.action_search:

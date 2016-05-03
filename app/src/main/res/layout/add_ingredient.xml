@@ -83,16 +83,30 @@
 
         </LinearLayout>
 
-        
-        <Button
-            android:id="@+id/add_ingredient_done"
-            android:layout_below="@id/ingredient_information"
-            android:text="@string/add_ingredient_done"
-            style="?attr/borderlessButtonStyle"
-            android:textColor="@color/colorPrimary"
-            android:layout_alignParentRight="true"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/ingredient_information">
+
+            <Button
+                android:id="@+id/add_ingredient_cancel"
+                android:text="@string/cancel"
+                style="?attr/borderlessButtonStyle"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/add_ingredient_done"
+                android:text="@string/add_ingredient_done"
+                style="?attr/borderlessButtonStyle"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
 
     </RelativeLayout>
