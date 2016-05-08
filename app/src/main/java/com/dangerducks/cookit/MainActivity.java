@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.RecipeAdapter;
+import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 
 import java.util.Vector;
 
@@ -94,11 +95,12 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("system", "onResume");
         setupRecyclerView();
     }
 
     private void setUpDrawer() {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         navigationView = (NavigationView) drawerLayout.findViewById(R.id.main_drawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
@@ -121,13 +123,18 @@ public class MainActivity extends AppCompatActivity{
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
+                Intent intent;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_close_session:
                         FileManager.deleteUserData(MainActivity.this);
-                        Intent intent = new Intent(MainActivity.this, Login.class);
+                        intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
                         finish();
+                        break;
+                    case R.id.nav_favourites:
+                        intent = new Intent(MainActivity.this, ShowFavourites.class);
+                        startActivity(intent);
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.nav_profile:
                         User.user().recipesSaved.clear();
@@ -138,6 +145,7 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.nav_my_recipes:
                         intent = new Intent(MainActivity.this, ShowIngredients.class);
                         startActivity(intent);
+                        drawerLayout.closeDrawers();
                 }
 
                 return false;
