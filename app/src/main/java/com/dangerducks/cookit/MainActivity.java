@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity{
         displayableRecipes = User.user().recipesSaved;
         adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
-        setupDB();
     }
 
     @Override
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity{
         super.onResume();
         setupRecyclerView();
     }
-
 
     private void setUpDrawer() {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
@@ -226,6 +225,7 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
 
@@ -249,7 +249,6 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println(requestCode + ", " + resultCode);
         switch (requestCode) {
             case RECIPE_ACTIVITY:
                 if(resultCode == RECIPE_REMOVED) {//setupRecyclerView();
@@ -259,15 +258,11 @@ public class MainActivity extends AppCompatActivity{
 //                    adapter.update(displayableRecipes);
                 } else
                 if(resultCode == RECIPE_FAVED) {
-                    displayableRecipes = User.user().recipesSaved;
                     adapter.notifyDataSetChanged();
                 }
                 break;
         }
     }
 
-    private void setupDB() {
-
-    }
 }
 

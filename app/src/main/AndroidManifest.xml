@@ -39,6 +39,10 @@
                   android:label="">
         </activity>
 
+        <activity android:name=".ShowFavourites"
+                  android:label="">
+        </activity>
+
     </application>
 
 </manifest>

@@ -144,8 +144,10 @@ public class FileManager {
         if(!path.exists()) path.mkdir();
 
         String fileName = recipe.getName() + recipe.getID() + ".obj";
+        File file = new File(dir + fileName);
+        if(file.exists()) file.delete();
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dir + fileName));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
             out.writeObject(recipe);
             out.close();
             return true;
@@ -165,6 +167,7 @@ public class FileManager {
         Recipe aux;
 
         for(String name: objects){
+            System.out.println(name);
             aux = FileManager.loadRecipe(name, dir);
             recipes.add(aux);
         }

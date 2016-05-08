@@ -110,6 +110,7 @@ public class Login extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+            User.user().recipesSaved.removeAllElements();
             User.user().recipesSaved.addAll(FileManager.getRecipes(getFilesDir().getPath()));
 
             for(Recipe r : User.user().recipesSaved) {
