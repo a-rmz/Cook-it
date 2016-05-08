@@ -119,6 +119,7 @@ public class AddRecipe extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle(getResources().getString(R.string.add_recipe_title));
     }
 
     private void setupSpinner() {

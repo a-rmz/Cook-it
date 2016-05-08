@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("system", "onResume");
         setupRecyclerView();
     }
 
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity{
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
             public void onDrawerOpened(View view) {
                 super.onDrawerOpened(view);
-                getSupportActionBar().setTitle(R.string.open_drawer);
                 invalidateOptionsMenu();
             }
 
@@ -174,6 +172,8 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+
 
     }
     @Override
@@ -187,7 +187,6 @@ public class MainActivity extends AppCompatActivity{
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
 
