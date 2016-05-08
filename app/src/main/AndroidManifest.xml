@@ -43,6 +43,11 @@
                   android:label="">
         </activity>
 
+        <activity android:name=".Profile"
+                  android:label="@string/profile">
+
+        </activity>
+
     </application>
 
 </manifest>

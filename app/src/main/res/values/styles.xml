@@ -25,4 +25,9 @@
 
     </style>
 
+    <style name="profileTextView" parent="Base.TextAppearance.AppCompat.Title">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
 </resources>

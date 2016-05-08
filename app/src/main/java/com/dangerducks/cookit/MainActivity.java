@@ -135,9 +135,15 @@ public class MainActivity extends AppCompatActivity{
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.nav_profile:
+                        intent = new Intent(MainActivity.this, Profile.class);
+                        startActivity(intent);
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_settings:
                         User.user().recipesSaved.clear();
                         adapter.clear();
                         FileManager.clearRecipes(getFilesDir().getPath());
+                        drawerLayout.closeDrawers();
                         Snackbar.make(findViewById(R.id.main_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_my_recipes:
@@ -174,8 +180,8 @@ public class MainActivity extends AppCompatActivity{
 
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
-
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

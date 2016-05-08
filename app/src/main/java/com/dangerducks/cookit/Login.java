@@ -55,6 +55,7 @@ public class Login extends AppCompatActivity {
                 String pas = pass.getText().toString();
 
                 if (loginValidation(usr, pas)) {
+                    User.user().setUsername(usr);
                     RecipeLoader RL = new RecipeLoader();
                     RL.execute();
                     startMainApplication();
@@ -73,8 +74,8 @@ public class Login extends AppCompatActivity {
     }
 
     protected boolean loginValidation(String user, String pass) {
-        return true;
-        //return db.Login(user, pass);
+//        return true;
+        return db.Login(user, pass);
         /*
         String[] userInfo = FileManager.loadUserData(Login.this);
 
@@ -89,6 +90,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void startMainApplication() {
+        User.user().setEmail(db.getMail(User.user().getUsername()));
         Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
         finish();

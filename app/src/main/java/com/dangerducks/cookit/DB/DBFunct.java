@@ -27,5 +27,17 @@ public class DBFunct {
         return con.InsertQuery(query);
     }
 
+    public String getMail(String user) {
+        String result = "";
+        String query = "SELECT email FROM Users WHERE username ='" + user + "'";
+        ResultSet resultSet = con.SearchQuery(query);
+        try {
+            result = resultSet.getString("email");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 }

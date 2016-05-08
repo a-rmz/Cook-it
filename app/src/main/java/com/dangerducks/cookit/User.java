@@ -29,6 +29,8 @@ public class User {
     private User() {
         recipesSaved = new Vector<>();
         favourites = new ArrayList<>();
+        name = "Name";
+        lastName = "Lastname";
     }
 
     public static User user() {
