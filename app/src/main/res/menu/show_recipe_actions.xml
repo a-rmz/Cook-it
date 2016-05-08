@@ -3,10 +3,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Search will display always -->
-    <item android1:id="@+id/action_search"
-          android1:title="@string/action_search"
-          android1:icon="@drawable/ic_search_white_24dp"
-          app:showAsAction="ifRoom"/>
 
     <item android1:id="@+id/action_remove"
           android1:title="@string/action_remove"
