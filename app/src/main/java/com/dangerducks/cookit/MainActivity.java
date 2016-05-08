@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity{
 
     private static final int RECIPE_ACTIVITY = 1;
     private static final int RECIPE_REMOVED = -1;
+    private static final int RECIPE_FAVED = -2;
 
 
     private CoordinatorLayout coordinatorLayout;
@@ -97,18 +98,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    private void setupToolbar() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        toolbar.inflateMenu(R.menu.main_activity_actions);
-
-        // Home menu for header
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-    }
-
     private void setUpDrawer() {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         navigationView = (NavigationView) drawerLayout.findViewById(R.id.main_drawer);
@@ -168,6 +157,18 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.inflateMenu(R.menu.main_activity_actions);
+
+        // Home menu for header
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+    }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -248,13 +249,19 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println(requestCode + ", " + resultCode);
         switch (requestCode) {
             case RECIPE_ACTIVITY:
-                if(resultCode == RECIPE_REMOVED) //setupRecyclerView();
-                    //User.user().recipesSaved = data.getExtras().get("recipes");
+                if(resultCode == RECIPE_REMOVED) {//setupRecyclerView();
+//                    User.user().recipesSaved = data.getExtras().get("recipes");
+//                    displayableRecipes = User.user().recipesSaved;
+//                    System.out.println("drsz: " + displayableRecipes.size());
+//                    adapter.update(displayableRecipes);
+                } else
+                if(resultCode == RECIPE_FAVED) {
                     displayableRecipes = User.user().recipesSaved;
-                    System.out.println("drsz: " + displayableRecipes.size());
-                    adapter.update(displayableRecipes);
+                    adapter.notifyDataSetChanged();
+                }
                 break;
         }
     }

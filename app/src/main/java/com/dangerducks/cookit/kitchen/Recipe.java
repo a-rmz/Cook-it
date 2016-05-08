@@ -103,6 +103,18 @@ public class Recipe implements Serializable {
         return false;
     }
 
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void unfav() {
+        favourite = false;
+    }
+
+    public void fav() {
+        favourite = true;
+    }
+
     public void addStep(Step step) {
         this.preparation.addStep(step);
     }
@@ -115,6 +127,6 @@ public class Recipe implements Serializable {
     public boolean equals(Object r) {
         Recipe rec = (Recipe) r;
         return
-            rec.name.equals(this.getName());
+            rec.getName().equals(this.getName());
     }
 }

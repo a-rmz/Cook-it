@@ -8,4 +8,5 @@
     <color name="loginBackground">#FFA91F</color>
     <color name="user_detail">#FFFFFF</color>
     <color name="main_background">#EDDDA6</color>
+    <color name="white">#FFFFFF</color>
 </resources>

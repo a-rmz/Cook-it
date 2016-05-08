@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.dangerducks.cookit.DB.DBFunct;
+import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.FileManager;
 
 public class Login extends AppCompatActivity {
@@ -110,6 +111,10 @@ public class Login extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             User.user().recipesSaved.addAll(FileManager.getRecipes(getFilesDir().getPath()));
+
+            for(Recipe r : User.user().recipesSaved) {
+                if(r.isFavourite()) User.user().addFavouriteRecipe(r);
+            }
             return null;
         }
 

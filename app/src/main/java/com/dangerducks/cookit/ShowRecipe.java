@@ -5,15 +5,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dangerducks.cookit.kitchen.Recipe;
 import com.dangerducks.cookit.utils.FileManager;
@@ -31,6 +35,7 @@ public class ShowRecipe extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbar;
     NestedScrollView nested;
     Toolbar toolbar;
+    FloatingActionButton favourite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,6 @@ public class ShowRecipe extends AppCompatActivity {
 
         appBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
 
-
         toolbar = (Toolbar) findViewById(R.id.recipe_toolbar);
         setupToolbar();
 
@@ -61,6 +65,34 @@ public class ShowRecipe extends AppCompatActivity {
         showCalories.setText(recipe.getCalories() + " calories");
 
         setupRecyclerView();
+
+        favourite = (FloatingActionButton) findViewById(R.id.recipe_favourite);
+        changeFABColor(recipe.isFavourite());
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast t;
+                FileManager.deleteRecipe(recipe, getFilesDir().toString());
+                if(recipe.isFavourite()) {
+                    recipe.unfav();
+                    User.user().removeFavouriteRecipe(recipe);
+                    t = Toast.makeText(getApplicationContext(), R.string.unfav, Toast.LENGTH_SHORT);
+
+                } else {
+                    recipe.fav();
+                    User.user().addFavouriteRecipe(recipe);
+                    t = Toast.makeText(getApplicationContext(), R.string.fav, Toast.LENGTH_SHORT);
+                }
+
+                changeFABColor(recipe.isFavourite());
+
+                User.user().updateRecipe(recipe, User.user().recipesSaved.indexOf(recipe));
+                FileManager.saveRecipe(recipe, getFilesDir().toString());
+                t.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 25);
+                t.show();
+                setResult(-2);
+            }
+        });
 
     }
 
@@ -81,6 +113,14 @@ public class ShowRecipe extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+    }
+
+    private void changeFABColor(boolean state) {
+        if(state) {
+            favourite.setBackgroundTintList(getResources().getColorStateList(R.color.loginBackground));
+        } else {
+            favourite.setBackgroundTintList(getResources().getColorStateList(R.color.colorPrimaryDark));
+        }
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {

@@ -20,6 +20,7 @@
             android:id="@+id/recipe_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="256dp"
+            app:expandedTitleTextAppearance="@style/AppTheme.Toolbar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
@@ -37,7 +38,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
-
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -132,6 +132,17 @@
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:tint="@color/white"
+        android:src="@drawable/ic_star_white_24dp"
+        app:layout_anchor="@+id/app_bar_layout"
+        app:layout_anchorGravity="bottom|right|end"
+        android:id="@+id/recipe_favourite"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -28,6 +28,7 @@ public class User {
 
     private User() {
         recipesSaved = new Vector<>();
+        favourites = new ArrayList<>();
     }
 
     public static User user() {
@@ -79,6 +80,15 @@ public class User {
     boolean isRecipeFavourite(Recipe recipe) {
         if(favourites.contains(recipe)) return true;
         return false;
+    }
+
+    /**
+     * Updates an existing recipe.
+     * @param recipe
+     */
+    void updateRecipe(Recipe recipe, int index) {
+        recipesSaved.remove(index);
+        recipesSaved.insertElementAt(recipe, index);
     }
 
     boolean dislikesIngredient(Ingredient ingredient) {

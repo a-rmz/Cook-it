@@ -20,4 +20,9 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.Toolbar">
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
 </resources>

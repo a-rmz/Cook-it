@@ -7,6 +7,8 @@ import java.util.Vector;
  */
 public class Preparation implements Serializable {
 
+    static final long serialVersionUID =-1097412748889190380L;
+
     Vector<Step> steps;
     //Vector<Ingredient> ingredients;
     int actualStep;
