@@ -36,7 +36,6 @@ public class AddStep extends AppCompatDialog {
     Step step;
     Recipe recipe;
     Button done;
-    Button add;
     int ingredientsAdded = 0;
 
     public AddStep(Activity activity, String stepName, Recipe recipe) {
@@ -76,7 +75,6 @@ public class AddStep extends AppCompatDialog {
         ingredientsSpinner = (Spinner) findViewById(R.id.ingredient_base);
         setupSpinner();
 
-        add = (Button) findViewById(R.id.add_ingredient_btn);
         setupIngredientAdder();
     }
 
@@ -106,39 +104,39 @@ public class AddStep extends AppCompatDialog {
 
         final LinearLayout container = (LinearLayout) findViewById(R.id.ingredient_container);
 
-        add.setOnClickListener(new View.OnClickListener() {
+        ingredientsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-
-                if(ingredientsSpinner.getSelectedItemId() != 0) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position != 0) {
                     LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    final View view = inflater.inflate(R.layout.add_step_ingredient, null);
+                    final View newView = inflater.inflate(R.layout.add_step_ingredient, null);
 
-                    TextView textOut = (TextView) view.findViewById(R.id.ingredient);
+                    TextView textOut = (TextView) newView.findViewById(R.id.ingredient);
 
                     Ingredient ingredient = Ingredient.createIngredientFromCursor((Cursor) ingredientsSpinner.getSelectedItem());
 
                     textOut.setText(ingredient.getName());
 
-                    Button remove = (Button) view.findViewById(R.id.remove_ingredient_btn);
+                    Button remove = (Button) newView.findViewById(R.id.remove_ingredient_btn);
                     remove.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ((LinearLayout) view.getParent()).removeView(view);
+                            ((LinearLayout) newView.getParent()).removeView(newView);
                             step.removeIngredient(--ingredientsAdded);
                         }
                     });
 
                     step.addIngredient(ingredient);
-                    container.addView(view);
+                    container.addView(newView);
                     ingredientsAdded++;
-
                 }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
 
     }
 
