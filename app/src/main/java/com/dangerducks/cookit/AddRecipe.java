@@ -1,6 +1,7 @@
 package com.dangerducks.cookit;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -174,9 +175,6 @@ public class AddRecipe extends AppCompatActivity {
 
                 addIngredients(step.getDescription());
                 text.setText("");
-
-                textOut = (TextView) findViewById(R.id.duration);
-                textOut.setText(recipe.preparation.getPreparationTime() + "");
             }
         });
 
@@ -188,6 +186,15 @@ public class AddRecipe extends AppCompatActivity {
         addStep.setTitle(step);
         addStep.setCancelable(false);
         addStep.show();
+        addStep.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                TextView textOut = (TextView) findViewById(R.id.duration);
+                textOut.setText(recipe.preparation.getPreparationTime() + " minutes");
+                textOut = (TextView) findViewById(R.id.calories);
+                textOut.setText(recipe.preparation.getCalories() + " calories");
+            }
+        });
     }
 
 
@@ -266,7 +273,7 @@ public class AddRecipe extends AppCompatActivity {
         } else {
             recipe.setName(name);
             recipe.setPortions(Integer.parseInt(portions));
-            recipe.setCalories(Integer.parseInt(calories));
+            recipe.setCalories(recipe.preparation.getCalories());
             recipe.setCategory(new Category(categories.getSelectedItem().toString()));
 
             recipe.setRID();

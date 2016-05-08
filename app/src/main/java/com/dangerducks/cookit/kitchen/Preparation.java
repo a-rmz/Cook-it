@@ -49,18 +49,28 @@ public class Preparation implements Serializable {
 //        ingredients.add(ingredient);
 //    }
 //
-//    public int getCalories(){
-//        int totalCalories = 0;
-//
-//        for (Ingredient i : ingredients) {
-//            totalCalories += i.calories;
-//        }
-//
-//        return totalCalories;
-//    }
+    public int getStepCalories(Step s){
+        int totalCalories = 0;
+
+        for (Ingredient i : s.getIngredients()) {
+            totalCalories += i.calories;
+        }
+
+        return totalCalories;
+    }
 
     public Vector<Step> getSteps() {
         return this.steps;
+    }
+
+    public int getCalories() {
+        int cals = 0;
+
+        for(Step s : steps) {
+            cals += getStepCalories(s);
+        }
+
+        return cals;
     }
 
     public int getPreparationTime() {

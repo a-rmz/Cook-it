@@ -44,39 +44,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/duration_caption"
-                android:layout_below="@id/recipe_name"
-                android:text="@string/duration_caption"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="25dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/duration"
-                android:layout_below="@id/duration_caption"
-                android:text="@string/duration_hint"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="25dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
 
             <LinearLayout
                 android:id="@+id/tv"
-                android:layout_below="@id/duration"
+                android:layout_below="@id/recipe_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginTop="25dp"
                 android:weightSum="2">
 
                 <TextView
-                    android:id="@+id/portions_caption"
-                    android:text="@string/portions_caption"
+                    android:id="@+id/duration_caption"
+                    android:text="@string/duration_caption"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginLeft="25dp"
@@ -86,8 +67,7 @@
 
                 <TextView
                     android:id="@+id/calories_caption"
-                    android:layout_below="@id/recipe_name"
-                    android:layout_toRightOf="@id/portions_caption"
+                    android:layout_toRightOf="@id/duration_caption"
                     android:text="@string/calories_caption"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -98,7 +78,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/et"
                 android:layout_below="@+id/tv"
@@ -108,6 +87,71 @@
                 android:layout_margin="5dp"
                 android:weightSum="2">
 
+                <TextView
+                    android:id="@+id/duration"
+                    android:text="@string/duration_hint"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:id="@+id/calories"
+                    android:text="@string/duration_hint"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/category_portions_captions"
+                android:layout_below="@id/et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/category_caption"
+                    android:text="@string/category_caption"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/portions_caption"
+                    android:text="@string/portions_caption"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/category_portions_content"
+                android:layout_below="@id/category_portions_captions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:weightSum="3">
+
+                <Spinner
+                    android:id="@+id/categories"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"/>
+
                 <EditText
                     android:id="@+id/portions"
                     android:inputType="number"
@@ -116,37 +160,12 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
 
-                <EditText
-                    android:id="@+id/calories"
-                    android:inputType="number"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/category_caption"
-                android:layout_below="@+id/et"
-                android:text="@string/category_caption"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Spinner
-                android:id="@+id/categories"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/category_caption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:id="@+id/step_adder"
-                android:layout_below="@id/categories"
+                android:layout_below="@id/category_portions_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
