@@ -108,10 +108,9 @@ public class ShowFavourites extends AppCompatActivity {
                         Snackbar.make(findViewById(R.id.fav_drawer_layout), "You already here", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_profile:
-                        User.user().recipesSaved.clear();
-                        adapter.clear();
-                        FileManager.clearRecipes(getFilesDir().getPath());
-                        Snackbar.make(findViewById(R.id.fav_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
+                        intent = new Intent(ShowFavourites.this, Profile.class);
+                        startActivity(intent);
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.nav_my_recipes:
                         intent = new Intent(ShowFavourites.this, ShowIngredients.class);
