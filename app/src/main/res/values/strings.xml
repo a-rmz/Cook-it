@@ -32,6 +32,7 @@
 
     <string name="card">Card</string>
     <string name="no_recipes">You don\'t have any recipe. :(</string>
+    <string name="dailyRecipe">Daily Recipe</string>
 
     <!-- Add recipe -->
     <string name="add_recipe_title">Add new recipe</string>

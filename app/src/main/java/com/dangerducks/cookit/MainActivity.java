@@ -22,6 +22,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -46,6 +47,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
 
 
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         displayableRecipes = User.user().recipesSaved;
         adapter = new RecipeAdapter(displayableRecipes);
         setupSwiper();
+
+        setDailyRecipe();
     }
 
     @Override
@@ -165,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         adapter.clear();
                         FileManager.clearRecipes(getFilesDir().getPath());
                         drawerLayout.closeDrawers();
+                        setDailyRecipe();
                         Snackbar.make(findViewById(R.id.main_drawer_layout), "Recipes deleted", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_my_recipes:
@@ -380,6 +385,30 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
 
         return false;
+    }
+
+    private void setDailyRecipe() {
+        CardView dailyCard = (CardView) findViewById(R.id.daily_recipe);
+        if(displayableRecipes.size() > 0) {
+            Random r = new Random(System.nanoTime());
+            final Recipe dailyRecipe = displayableRecipes.elementAt(r.nextInt(displayableRecipes.size()));
+            TextView card = (TextView) dailyCard.findViewById(R.id.card_header);
+            card.setText(dailyRecipe.getName());
+            card = (TextView) dailyCard.findViewById(R.id.card_show_portions);
+            card.setText(dailyRecipe.getPortions() + " portions");
+            dailyCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ShowRecipe.class);
+                    intent.putExtra("recipe", dailyRecipe);
+                    ((Activity) v.getContext()).startActivityForResult(intent, 1, null);
+                }
+            });
+        } else {
+            ViewGroup parent = (ViewGroup) dailyCard.getParent();
+            parent.removeView(dailyCard);
+        }
+
     }
 }
 
