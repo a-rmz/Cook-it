@@ -60,15 +60,31 @@
             android:layout_height="wrap_content"></LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/finish_add_ingredient"
-        android:layout_below="@id/scroll_ingredient_container"
-        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/finish_add_ingredient"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/scroll_ingredient_container"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_add_ingredient"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/finish_add_ingredient"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/finish_add_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

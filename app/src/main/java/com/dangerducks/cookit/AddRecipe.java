@@ -166,22 +166,20 @@ public class AddRecipe extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         ((LinearLayout) view.getParent()).removeView(view);
-                        recipe.removeStep(--stepsAdded);
+                        recipe.preparation.removeStep(--stepsAdded);
                     }
                 });
 
-                container.addView(view);
-                stepsAdded++;
-
-                addIngredients(step.getDescription());
+                addIngredients(step.getDescription(), container, view);
                 text.setText("");
             }
         });
 
-
     }
 
-    private void addIngredients(String step) {
+
+    private void addIngredients(String step, final LinearLayout container, final View view) {
+        final int size1 = recipe.preparation.getSteps().size();
         AddStep addStep = new AddStep(this, step, recipe);
         addStep.setTitle(step);
         addStep.setCancelable(false);
@@ -189,10 +187,15 @@ public class AddRecipe extends AppCompatActivity {
         addStep.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                TextView textOut = (TextView) findViewById(R.id.duration);
-                textOut.setText(recipe.preparation.getPreparationTime() + " minutes");
-                textOut = (TextView) findViewById(R.id.calories);
-                textOut.setText(recipe.preparation.getCalories() + " calories");
+                int size2 = recipe.preparation.getSteps().size();
+                if (size1 < size2) {
+                    TextView textOut = (TextView) findViewById(R.id.duration);
+                    textOut.setText(recipe.preparation.getPreparationTime() + " minutes");
+                    textOut = (TextView) findViewById(R.id.calories);
+                    textOut.setText(recipe.preparation.getCalories() + " calories");
+                    container.addView(view);
+                    stepsAdded++;
+                }
             }
         });
     }

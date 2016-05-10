@@ -62,11 +62,11 @@ public class AddIngredientDialog extends AppCompatDialog {
     }
 
     private boolean validate() {
-        if( name.getText().toString().length() > 0 &&
+        return (
+            name.getText().toString().length() > 0 &&
             Integer.parseInt(calories.getText().toString()) > 0 &&
-            Integer.parseInt(available.getText().toString()) > 0 )
-            return true;
-        return false;
+            Integer.parseInt(available.getText().toString()) > 0
+        );
     }
 
 }

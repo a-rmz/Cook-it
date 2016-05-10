@@ -35,7 +35,7 @@ public class AddStep extends AppCompatDialog {
     String stepName;
     Step step;
     Recipe recipe;
-    Button done;
+    Button done, cancel;
     int ingredientsAdded = 0;
 
     public AddStep(Activity activity, String stepName, Recipe recipe) {
@@ -60,15 +60,23 @@ public class AddStep extends AppCompatDialog {
             @Override
             public void onClick(View v) {
                 String duration = ((EditText) findViewById(R.id.add_duration)).getText().toString();
-                if(!duration.isEmpty()) {
+                if (!duration.isEmpty()) {
                     step.setTime(Integer.parseInt(duration));
                     recipe.preparation.addStep(step);
                     dismiss();
                 } else {
-                    Toast t = Toast.makeText(v.getContext(),  activity.getResources().getString(R.string.empty_time), Toast.LENGTH_SHORT);
+                    Toast t = Toast.makeText(v.getContext(), activity.getResources().getString(R.string.empty_time), Toast.LENGTH_SHORT);
                     t.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 30);
                     t.show();
                 }
+            }
+        });
+
+        cancel = (Button) findViewById(R.id.cancel_add_ingredient);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
             }
         });
 
