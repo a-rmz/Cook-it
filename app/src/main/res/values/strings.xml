@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Cook it!</string>
+    <string name="preferences_key">com.dangerducks.cookit.PREFERENCE_FILE_KEY</string>
+
     <string name="action_login">Log in</string>
     <string name="action_signin">Sign in</string>
     <string name="save_user">Save login data</string>

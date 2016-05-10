@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -152,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         FileManager.deleteUserData(MainActivity.this);
                         intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
+                        deleteSharedPreferences();
                         finish();
                         break;
                     case R.id.nav_favourites:
@@ -364,8 +366,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 tv.setText(cursor.getInt(2) + " portions");
 
                 Recipe rec = null;
-                for(Recipe r : User.user().recipesSaved) {
-                    if(r.getName().equals(cursor.getString(1))) {
+                for (Recipe r : User.user().recipesSaved) {
+                    if (r.getName().equals(cursor.getString(1))) {
                         rec = r;
                     }
                 }
@@ -408,6 +410,19 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             ViewGroup parent = (ViewGroup) dailyCard.getParent();
             parent.removeView(dailyCard);
         }
+
+    }
+
+    private void deleteSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(
+            getString(R.string.preferences_key),
+            MODE_PRIVATE
+        );
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("USER", null);
+        editor.putString("MAIL", null);
+        editor.putString("PASS", null);
+        editor.apply();
 
     }
 }

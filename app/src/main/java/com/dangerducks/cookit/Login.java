@@ -1,6 +1,8 @@
 package com.dangerducks.cookit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -34,11 +36,11 @@ public class Login extends AppCompatActivity {
 
         db = new DBFunct();
 
-//        String[] userInfo = FileManager.loadUserData(Login.this);
-//        if(loginValidation(userInfo[0], userInfo[1])) {
-//            finish();
-//            startMainApplication();
-//        }
+        if(verifyLogin()) {
+            setUserVals();
+            startMainApplication();
+            finish();
+        }
 
         login = (Button) findViewById(R.id.btn_login);
         signin = (Button) findViewById(R.id.btn_signin);
@@ -53,11 +55,23 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usr = user.getText().toString();
                 String pas = pass.getText().toString();
+                String mail =  db.getMail(usr);
+
 
                 if (loginValidation(usr, pas)) {
-                    User.user().setUsername(usr);
-                    RecipeLoader RL = new RecipeLoader();
-                    RL.execute();
+                    if(saveData.isChecked()) {
+                        SharedPreferences sharedPreferences = getSharedPreferences(
+                                getString(R.string.preferences_key),
+                                MODE_PRIVATE
+                        );
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("USER", usr);
+                        editor.putString("MAIL", mail);
+                        editor.putString("PASS", pas);
+                        editor.apply();
+                    }
+
+                    setUserVals(usr, mail);
                     startMainApplication();
                 } else {
                     Snackbar.make(v, getResources().getText(R.string.wrong_data).toString(), Snackbar.LENGTH_SHORT).show();
@@ -74,23 +88,30 @@ public class Login extends AppCompatActivity {
     }
 
     protected boolean loginValidation(String user, String pass) {
-        return true;
-//        return db.Login(user, pass);
-        /*
-        String[] userInfo = FileManager.loadUserData(Login.this);
+        return db.Login(user, pass);
+    }
 
-        if(userInfo != null && user.equals(userInfo[0]) && pass.equals(userInfo[1])) {
-            User.user().setUsername(user);
-            User.user().setEmail(userInfo[2]);
-            return true;
-        }
+    private void setUserVals(String uname, String email) {
+        User.user().setUsername(uname);
+        User.user().setEmail(email);
+    }
 
-        return false;
-        */
+    private void setUserVals() {
+        SharedPreferences sharedPreferences = (
+                this.getSharedPreferences(
+                        getString(R.string.preferences_key),
+                        Context.MODE_PRIVATE
+                )
+        );
+        String uname = sharedPreferences.getString("USER", null);
+        String email = sharedPreferences.getString("MAIL", null);
+        setUserVals(uname, email);
+        sharedPreferences = null;
     }
 
     private void startMainApplication() {
-        User.user().setEmail(db.getMail(User.user().getUsername()));
+        RecipeLoader RL = new RecipeLoader();
+        RL.execute();
         Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -105,6 +126,23 @@ public class Login extends AppCompatActivity {
         clear.setText("");
 
     }
+
+    /**
+     * Validates if the user selected the Save login data checkbox
+     */
+    private boolean verifyLogin() {
+        SharedPreferences sharedPreferences = (
+            this.getSharedPreferences(
+                    getString(R.string.preferences_key),
+                    Context.MODE_PRIVATE
+                )
+            );
+        String uname = sharedPreferences.getString("USER", null);
+        String pass = sharedPreferences.getString("PASS", null);
+        sharedPreferences = null;
+        return (!(uname == null && pass == null)) && db.Login(uname, pass);
+    }
+
 
 
 
