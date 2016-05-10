@@ -56,7 +56,7 @@ public class ShowRecipe extends AppCompatActivity {
         setupToolbar();
 
         showDuration = (TextView) findViewById(R.id.show_duration);
-        showDuration.setText(recipe.getDuration() + " minutes");
+        showDuration.setText(recipe.preparation.getPreparationTime() + " minutes");
 
         showPortions = (TextView) findViewById(R.id.show_recipe_portions);
         showPortions.setText(recipe.getPortions() + " portions");
